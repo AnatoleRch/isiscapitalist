@@ -1,3 +1,4 @@
+import { World } from './graphql';
 export declare class AppService {
-    getHello(): string;
+    readUserWorld(user: string): World;
 }

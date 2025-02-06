@@ -12,6 +12,9 @@ const fs = require("fs");
 const path = require("path");
 const origworld_1 = require("./origworld");
 let AppService = class AppService {
+    getHello() {
+        throw new Error('Method not implemented.');
+    }
     readUserWorld(user) {
         try {
             const data = fs.readFileSync(path.join(process.cwd(), 'userworlds/', user + '-world.json'));

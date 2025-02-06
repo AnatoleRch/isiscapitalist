@@ -7,6 +7,9 @@ import { origworld } from './origworld';
 
 @Injectable()
 export class AppService {
+  getHello(): string {
+    throw new Error('Method not implemented.');
+  }
   readUserWorld(user: string): World {
     try {
       const data = fs.readFileSync(

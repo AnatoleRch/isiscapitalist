@@ -14,7 +14,6 @@ const graphql_1 = require("@nestjs/graphql");
 const apollo_1 = require("@nestjs/apollo");
 const path_1 = require("path");
 const resolver_1 = require("./resolver");
-providers: [app_service_1.AppService, resolver_1.GraphQlResolver];
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,7 +30,7 @@ exports.AppModule = AppModule = __decorate([
             }),
         ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, resolver_1.GraphQlResolver],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

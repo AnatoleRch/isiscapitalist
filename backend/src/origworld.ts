@@ -2,7 +2,7 @@ import { RatioType } from "./graphql";
 
 export const origworld = {
     name: 'A Nice World 2',
-    logo: 'icones/ecolo.jpg',
+    logo: 'icones/ecolo.png',
     money: 0,
     score: 0,
     totalangels: 0,
@@ -13,7 +13,7 @@ export const origworld = {
         {
             id: 1,
             name: 'Des bonbons !!',
-            logo: 'icones/bonbons.jpg',
+            logo: 'icones/bonbon.png',
             cout: 3,
             croissance: 1.03,
             revenu: 1,
@@ -24,7 +24,7 @@ export const origworld = {
             paliers: [
                 {
                     name: 'Une poignée de bonbons !',
-                    logo: 'icones/bonbons.jpg',
+                    logo: 'icones/bonbon.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -33,7 +33,7 @@ export const origworld = {
                 },
                 {
                     name: "Une sac de bonbons !!",
-                    logo: 'icones/bonbons.jpg',
+                    logo: 'icones/bonbon.png',
                     seuil: 100,
                     idcible: 1,
                     ratio: 2,
@@ -42,7 +42,7 @@ export const origworld = {
                 },
                 {
                     name: "Une montagne de bonbons !!!",
-                    logo: 'icones/bonbons.jpg',
+                    logo: 'icones/bonbon.png',
                     seuil: 1000,
                     idcible: 1,
                     ratio: 2,
@@ -53,8 +53,8 @@ export const origworld = {
         },
         {
             id: 2,
-            name: 'Des chocolats !!',
-            logo: 'icones/chocolats.jpg',
+            name: 'Des cookies !!',
+            logo: 'icones/cookie.png',
             cout: 5,
             croissance: 1.07,
             revenu: 3,
@@ -64,8 +64,8 @@ export const origworld = {
             managerUnlocked: false,
             paliers: [
                 {
-                    name: 'Une poignée de chocolats !',
-                    logo: 'icones/chocolats.jpg',
+                    name: 'Une assiete de cookies !',
+                    logo: 'icones/cookie.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -73,8 +73,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une sac de chocolats !!",
-                    logo: 'icones/chocolats.jpg',
+                    name: "Une tonne de cookies !!",
+                    logo: 'icones/cookie.png',
                     seuil: 100,
                     idcible: 1,
                     ratio: 2,
@@ -82,8 +82,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une montagne de chocolats !!!",
-                    logo: 'icones/chocolats.jpg',
+                    name: "Une montagne de cookies !!!",
+                    logo: 'icones/cookie.png',
                     seuil: 1000,
                     idcible: 1,
                     ratio: 2,
@@ -95,7 +95,7 @@ export const origworld = {
         {
             id: 3,
             name: 'Une barbe à papa !!',
-            logo: 'icones/barbapapa.jpg',
+            logo: 'icones/barbapapa.png',
             cout: 8,
             croissance: 1.12,
             revenu: 5,
@@ -106,7 +106,7 @@ export const origworld = {
             paliers: [
                 {
                     name: 'Comme un petit nuage !',
-                    logo: 'icones/barbapapa.jpg',
+                    logo: 'icones/barbapapa.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -114,8 +114,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une sac de chocolats !!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "Un gros nuage de barbapapa !!",
+                    logo: 'icones/barbapapa.png',
                     seuil: 100,
                     idcible: 1,
                     ratio: 2,
@@ -123,8 +123,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une montagne de chocolats !!!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "Une piscine de barbapapa !!!",
+                    logo: 'icones/barbapapa.png',
                     seuil: 1000,
                     idcible: 1,
                     ratio: 2,
@@ -135,8 +135,8 @@ export const origworld = {
         },
         {
             id: 4,
-            name: 'Glaces !!',
-            logo: 'icones/barbapapa.jpg',
+            name: 'Une Glaces !!',
+            logo: 'icones/glace.png',
             cout: 15,
             croissance: 1.12,
             revenu: 8,
@@ -146,8 +146,8 @@ export const origworld = {
             managerUnlocked: false,
             paliers: [
                 {
-                    name: 'Comme un petit nuage !',
-                    logo: 'icones/barbapapa.jpg',
+                    name: 'Plein de glaces !',
+                    logo: 'icones/glace.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -155,8 +155,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une sac de chocolats !!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "De quoi faire un bonhomme de neige !!",
+                    logo: 'icones/glace.png',
                     seuil: 100,
                     idcible: 1,
                     ratio: 2,
@@ -164,8 +164,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une montagne de chocolats !!!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "On peut faire un igloo !!!",
+                    logo: 'icones/glace.png',
                     seuil: 1000,
                     idcible: 1,
                     ratio: 2,
@@ -177,7 +177,7 @@ export const origworld = {
         {
             id: 5,
             name: 'Un Panckake !!',
-            logo: 'icones/barbapapa.jpg',
+            logo: 'icones/panckake.png',
             cout: 25,
             croissance: 1.08,
             revenu: 13,
@@ -187,8 +187,8 @@ export const origworld = {
             managerUnlocked: false,
             paliers: [
                 {
-                    name: 'Comme un petit nuage !',
-                    logo: 'icones/barbapapa.jpg',
+                    name: 'Une pile de panckakes !',
+                    logo: 'icones/panckake.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -196,8 +196,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une sac de chocolats !!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "Une tour de panckakes !!",
+                    logo: 'icones/panckake.png',
                     seuil: 100,
                     idcible: 1,
                     ratio: 2,
@@ -205,8 +205,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une montagne de chocolats !!!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "Un gratte-ciel fait de panckakes !!!",
+                    logo: 'icones/panckake.png',
                     seuil: 1000,
                     idcible: 1,
                     ratio: 2,
@@ -218,7 +218,7 @@ export const origworld = {
         {
             id: 6,
             name: 'Un Paris-Brest !!',
-            logo: 'icones/barbapapa.jpg',
+            logo: 'icones/Paris-Brest.png',
             cout: 35,
             croissance: 1.05,
             revenu: 20,
@@ -228,8 +228,8 @@ export const origworld = {
             managerUnlocked: false,
             paliers: [
                 {
-                    name: 'Comme un petit nuage !',
-                    logo: 'icones/barbapapa.jpg',
+                    name: '10 Paris-Brest',
+                    logo: 'icones/Paris-Brest.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -237,8 +237,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une sac de chocolats !!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "100 Paris-Brest !!",
+                    logo: 'icones/Paris-Brest.png',
                     seuil: 100,
                     idcible: 1,
                     ratio: 2,
@@ -246,8 +246,8 @@ export const origworld = {
                     unlocked: false,
                 },
                 {
-                    name: "Une montagne de chocolats !!!",
-                    logo: 'icones/barbapapa.jpg',
+                    name: "1000 Paris-Brest !!!",
+                    logo: 'icones/Paris-Brest.png',
                     seuil: 1000,
                     idcible: 1,
                     ratio: 2,

@@ -8,9 +8,19 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppService = void 0;
 const common_1 = require("@nestjs/common");
+const fs = require("fs");
+const path = require("path");
+const origworld_1 = require("./origworld");
 let AppService = class AppService {
-    getHello() {
-        return 'Hello World!';
+    readUserWorld(user) {
+        try {
+            const data = fs.readFileSync(path.join(process.cwd(), 'userworlds/', user + '-world.json'));
+            return JSON.parse(data.toString());
+        }
+        catch (e) {
+            console.log(e.message);
+            return origworld_1.origworld;
+        }
     }
 };
 exports.AppService = AppService;

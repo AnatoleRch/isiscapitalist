@@ -4,20 +4,22 @@ import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
-
+import { GraphQlResolver } from './resolver';
+providers: [AppService, GraphQlResolver]
 
 @Module({
   imports: [
-  GraphQLModule.forRoot<ApolloDriverConfig>({
-  driver: ApolloDriver,
-  typePaths: ['./**/*.graphql'],
-  definitions: {
-  path: join(process.cwd(), 'src/graphql.ts'),
-  outputAs: 'class',
-  },
-  }),
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      typePaths: ['./**/*.graphql'],
+      definitions: {
+        path: join(process.cwd(), 'src/graphql.ts'),
+        outputAs: 'class',
+      },
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],
-  })
-export class AppModule {}
+})
+export class AppModule { }
+

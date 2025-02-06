@@ -256,5 +256,85 @@ export const origworld = {
                 },
             ],
         },
-    ]
-}
+    ],
+    allunlocks: [
+        {
+            name: 'All is better than one',
+            logo: 'icones/all.jpg',
+            seuil: 30,
+            idcible: 0,
+            ratio: 2,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        },
+        {
+            name: 'To take and not to give',
+            logo: 'icones/all.jpg',
+            seuil: 150,
+            idcible: 0,
+            ratio: 3,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        }
+    ],
+    upgrades: [
+        {
+            name: 'Do you like paper bag ?',
+            logo: 'icones/sacpapier.jpg',
+            seuil: 1000,
+            idcible: 1,
+            ratio: 3,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        },
+        {
+            name: 'This is my bin',
+            logo: 'icones/recyclage.jpg',
+            seuil: 15000,
+            idcible: 2,
+            ratio: 3,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        },
+    ],
+    angelupgrades: [
+        {
+            name: 'Angel Sacrifice',
+            logo: 'icones/angel.png',
+            seuil: 10,
+            idcible: 0,
+            ratio: 3,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        },
+        {
+            name: 'Angelic Mutiny',
+            logo: 'icones/angel.png',
+            seuil: 100000,
+            idcible: -1,
+            ratio: 2,
+            typeratio: RatioType.ange,
+            unlocked: false,
+        },
+    ],
+    managers: [
+        {
+            name: 'Wangari Maathai',
+            logo: 'icones/WangariMaathai.jpg',
+            seuil: 10,
+            idcible: 1,
+            ratio: 0,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        },
+        {
+            name: 'Ellen MacArthur',
+            logo: 'icones/ellenmacarthur.jpg',
+            seuil: 15000,
+            idcible: 2,
+            ratio: 0,
+            typeratio: RatioType.gain,
+            unlocked: false,
+        }
+    ],
+};

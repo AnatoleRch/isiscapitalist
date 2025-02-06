@@ -22,6 +22,14 @@ let AppService = class AppService {
             return origworld_1.origworld;
         }
     }
+    saveWorld(user, world) {
+        fs.writeFile(path.join(process.cwd(), 'userworlds/', user + '-world.json'), JSON.stringify(world), (err) => {
+            if (err) {
+                console.error(err);
+                throw new Error(`Erreur d'écriture du monde coté serveur`);
+            }
+        });
+    }
 };
 exports.AppService = AppService;
 exports.AppService = AppService = __decorate([

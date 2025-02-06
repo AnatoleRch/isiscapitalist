@@ -13,6 +13,8 @@ const app_service_1 = require("./app.service");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_1 = require("@nestjs/apollo");
 const path_1 = require("path");
+const resolver_1 = require("./resolver");
+providers: [app_service_1.AppService, resolver_1.GraphQlResolver];
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;

@@ -29,4 +29,40 @@ export declare const origworld: {
             unlocked: boolean;
         }[];
     }[];
+    allunlocks: {
+        name: string;
+        logo: string;
+        seuil: number;
+        idcible: number;
+        ratio: number;
+        typeratio: RatioType;
+        unlocked: boolean;
+    }[];
+    upgrades: {
+        name: string;
+        logo: string;
+        seuil: number;
+        idcible: number;
+        ratio: number;
+        typeratio: RatioType;
+        unlocked: boolean;
+    }[];
+    angelupgrades: {
+        name: string;
+        logo: string;
+        seuil: number;
+        idcible: number;
+        ratio: number;
+        typeratio: RatioType;
+        unlocked: boolean;
+    }[];
+    managers: {
+        name: string;
+        logo: string;
+        seuil: number;
+        idcible: number;
+        ratio: number;
+        typeratio: RatioType;
+        unlocked: boolean;
+    }[];
 };

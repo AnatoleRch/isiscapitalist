@@ -24,6 +24,19 @@ let GraphQlResolver = class GraphQlResolver {
         this.service.saveWorld(user, world);
         return world;
     }
+    async acheterQtProduit(user, id, quantite) {
+        const world = await this.service.readUserWorld(user);
+        const bought_product = world.products.find(p => p.id === id);
+        if (!bought_product)
+            throw new Error(`Produit avec l'ID ${id} introuvable`);
+        const totalCost = bought_product.cout * ((1 - Math.pow(bought_product.croissance, quantite)) / (1 - bought_product.croissance));
+        if (world.money < totalCost)
+            throw new Error("Fonds insuffisants pour l'achat");
+        world.money -= totalCost;
+        bought_product.quantite += quantite;
+        bought_product.cout *= Math.pow(bought_product.croissance, quantite);
+        this.service.saveWorld(user, world);
+    }
 };
 exports.GraphQlResolver = GraphQlResolver;
 __decorate([
@@ -33,6 +46,15 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], GraphQlResolver.prototype, "getWorld", null);
+__decorate([
+    (0, graphql_1.Mutation)(),
+    __param(0, (0, graphql_1.Args)('user')),
+    __param(1, (0, graphql_1.Args)('id')),
+    __param(2, (0, graphql_1.Args)('quantite')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, Number, Number]),
+    __metadata("design:returntype", Promise)
+], GraphQlResolver.prototype, "acheterQtProduit", null);
 exports.GraphQlResolver = GraphQlResolver = __decorate([
     (0, graphql_1.Resolver)('World'),
     __metadata("design:paramtypes", [app_service_1.AppService])

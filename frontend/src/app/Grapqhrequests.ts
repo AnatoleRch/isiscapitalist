@@ -1,0 +1,73 @@
+import {gql} from "@urql/core";
+
+export const GET_WORLD = gql`
+    query getWorld($user: String!) {
+        getWorld(user: $user) {
+            name
+            angelbonus
+            logo
+            money
+            score
+            totalangels
+            activeangels
+            lastupdate
+            products {
+            	timeleft
+            	quantite
+            	vitesse
+            	revenu
+            	croissance
+            	cout
+            	logo
+            	name
+            	id
+                managerUnlocked
+                paliers{
+                    name
+                    logo
+                    seuil
+                    idcible
+                    ratio
+                    typeratio
+                    unlocked
+                }
+  	        }
+            allunlocks{
+                name
+            	logo
+            	seuil
+            	idcible
+            	ratio
+                typeratio
+            	unlocked
+            }
+            upgrades{
+                name
+            	logo
+            	seuil
+            	idcible
+            	ratio
+                typeratio
+            	unlocked
+            }
+            angelupgrades{
+                name
+            	logo
+            	seuil
+            	idcible
+            	ratio
+                typeratio
+            	unlocked
+            }
+            managers{
+                name
+            	logo
+            	seuil
+            	idcible
+            	ratio
+                typeratio
+            	unlocked
+            }
+        }
+    }
+`

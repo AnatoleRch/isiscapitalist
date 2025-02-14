@@ -56,7 +56,6 @@ export class World {
 
 export abstract class IQuery {
     abstract getWorld(user: string): Nullable<World> | Promise<Nullable<World>>;
-    
 }
 
 export abstract class IMutation {

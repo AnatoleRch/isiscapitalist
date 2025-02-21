@@ -37,13 +37,10 @@ let AppService = class AppService {
         if (product.quantite > 0) {
             if (!product.managerUnlocked) {
                 if (product.timeleft > 0) {
-                    if (product.timeleft <= elapsedTime) {
+                    product.timeleft = Math.max(0, product.timeleft - elapsedTime);
+                    if (product.timeleft === 0) {
                         world.money += product.revenu * product.quantite;
                         world.score += product.revenu * product.quantite;
-                        product.timeleft = 0;
-                    }
-                    else {
-                        product.timeleft -= elapsedTime;
                     }
                 }
             }
@@ -51,21 +48,20 @@ let AppService = class AppService {
                 const productionCycles = Math.floor(elapsedTime / product.vitesse);
                 if (productionCycles > 0) {
                     world.money += productionCycles * product.revenu * product.quantite;
+                    world.score += productionCycles * product.revenu * product.quantite;
                 }
                 product.timeleft = elapsedTime % product.vitesse;
-                console.log(product.timeleft);
             }
         }
     }
-    updateWorld(user) {
-        const world = this.readUserWorld(user);
+    updateWorld(world) {
         const currentTime = Date.now();
         const elapsedTime = currentTime - world.lastupdate;
+        world.lastupdate = currentTime;
         world.products.forEach(product => {
             this.updateProduct(product, elapsedTime, world);
         });
-        world.lastupdate = currentTime;
-        this.saveWorld(user, world);
+        console.log(elapsedTime);
     }
 };
 exports.AppService = AppService;

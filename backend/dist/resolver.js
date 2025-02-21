@@ -21,7 +21,7 @@ let GraphQlResolver = class GraphQlResolver {
     }
     async getWorld(user) {
         const world = this.service.readUserWorld(user);
-        this.service.updateWorld(user);
+        this.service.updateWorld(world);
         this.service.saveWorld(user, world);
         return world;
     }

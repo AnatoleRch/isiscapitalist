@@ -4,5 +4,5 @@ export declare class AppService {
     readUserWorld(user: string): World;
     saveWorld(user: string, world: World): void;
     updateProduct(product: Product, elapsedTime: number, world: World): void;
-    updateWorld(user: string): void;
+    updateWorld(world: World): void;
 }

@@ -6,11 +6,13 @@ import { Palier, World } from './graphql';
 export class GraphQlResolver {
     constructor(private service: AppService) { }
     @Query()
-    async getWorld(@Args('user') user: string) {
-        const world = this.service.readUserWorld(user);
-        this.service.saveWorld(user, world);
-        return world;
-    }
+async getWorld(@Args('user') user: string) {
+    const world = this.service.readUserWorld(user);
+    this.service.updateWorld(user);
+    this.service.saveWorld(user, world);
+    return world;
+}
+
     @Mutation()
     async acheterQtProduit(
         @Args('user') user: string,
@@ -81,6 +83,9 @@ async engagerManager(
 
     return manager;
 }
+
+
+
 
 
     // Helper function to handle the production timer

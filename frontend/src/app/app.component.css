@@ -1,12 +1,40 @@
+.content {
+  
+}
 .header {
   display: grid;
   grid-template-columns: 25% 25% 30% 20%;
 }
 .main {
   display: grid;
-  grid-template-columns: 20% 80%;
+  grid-template-columns: 25% 75%;
+  position:fixed;
+  width: 100%;
+  height: 100%;
+  background-color: blueviolet;
 }
-.product {
+.products {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-auto-rows: 1fr;
+  background-image: url("/chocofactory.jpg");
+  background-size: cover;
+}
+/* .productdiv {
+  width: 70%;
+  height: 60%;
+  background-color: white;
+  border-radius: 50px;
+  margin: 20%;
+  margin-top: 5%;
+  margin-bottom: 5%;
+} */
+.leftButtonDiv {
+  background-color: aqua;
+}
+
+.leftButton {
+  width: 80%;
+  height: 10%;
+  margin: 10%;
 }

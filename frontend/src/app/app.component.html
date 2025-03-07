@@ -11,16 +11,22 @@
       <div> <span id="worldname"> {{user}} </span> </div>
     </div>
     <div class="main">
-      <div> liste des boutons de menu </div>
-      <div class="product">
-        <div> premier produit 
+      <div class="leftButtonDiv"> 
+        <button class="leftButton"> Carrière </button>
+        <button class="leftButton"> Bonus </button>
+        <button class="leftButton"> Améliorations </button>
+        <button class="leftButton"> Managers </button>
+        <button class="leftButton"> Anges </button>
+      </div>
+      <div class="products">
+        <div class="productdiv"> premier produit 
           <app-product [prod]="world.products[0]" class="product"></app-product>
         </div>
-        <div> second produit </div>
-        <div> troisième produit </div>
-        <div> quatrième produit </div>
-        <div> cinquième produit </div>
-        <div> sixième produit </div>
+        <div class="productdiv"> second produit </div>
+        <div class="productdiv"> troisième produit </div>
+        <div class="productdiv"> quatrième produit </div>
+        <div class="productdiv"> cinquième produit </div>
+        <div class="productdiv"> sixième produit </div>
       </div>
     </div>
   </div>

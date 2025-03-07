@@ -57,41 +57,48 @@ export class AppService {
 
 
   updateProduct(product: Product, elapsedTime: number, world: World) {
-    
-    if (product.quantite > 0) {
-        if (!product.managerUnlocked) {
-            if (product.timeleft > 0) {
-                product.timeleft = Math.max(0, product.timeleft - elapsedTime);
-                if (product.timeleft === 0) {
-                    world.money += product.revenu * product.quantite;
-                    world.score += product.revenu * product.quantite;
-                }
-            }
-        } else {
-            const productionCycles = Math.floor(elapsedTime / product.vitesse);
-            if (productionCycles > 0) {
-                world.money += productionCycles * product.revenu * product.quantite;
-                world.score += productionCycles * product.revenu * product.quantite;
-            }
-            product.timeleft = elapsedTime % product.vitesse; // Reste du temps
+    if (product.quantite > 0) { // Vérifier que le produit est possédé
+      if (!product.managerUnlocked) {
+        // Produit sans manager : vérifier si timeleft > 0 et < elapsedTime
+        if (product.timeleft > 0) {
+          if (product.timeleft <= elapsedTime) {
+            // Production is complete
+            world.money += product.revenu * product.quantite; // Ajouter le revenu
+            world.score += product.revenu * product.quantite;
+            product.timeleft = 0; // Réinitialisation du timeleft
+          } else {
+            // Production is still ongoing
+            product.timeleft -= elapsedTime;
+          }
         }
+      } else {
+        // Produit avec manager : calcul du nombre de productions complètes
+        const productionCycles = Math.floor(elapsedTime / product.vitesse);
+        if (productionCycles > 0) {
+          world.money += productionCycles * product.revenu * product.quantite;
+        }
+        // Update timeleft for the next production cycle
+        product.timeleft = elapsedTime % product.vitesse;
+        console.log(product.timeleft)
+      }
     }
+  }
+
+  updateWorld(user: string) {
+    const world = this.readUserWorld(user);
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - world.lastupdate; // Temps écoulé en millisecondes
     
-}
 
-
-updateWorld(world: World) {
-  const currentTime = Date.now();
-  const elapsedTime = currentTime - world.lastupdate;
-
-  world.lastupdate = currentTime; // Mettre à jour ici pour éviter un problème de timing
-
-  world.products.forEach(product => {
+    // Update each product individually
+    world.products.forEach(product => {
       this.updateProduct(product, elapsedTime, world);
-  });
+    });
 
-  console.log(elapsedTime)
-}
+    // Mise à jour du lastupdate
+    world.lastupdate = currentTime;
 
-
+    // Sauvegarde des modifications
+    this.saveWorld(user, world);
+  }
 }

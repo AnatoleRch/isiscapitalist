@@ -8,7 +8,7 @@ export class GraphQlResolver {
     @Query()
 async getWorld(@Args('user') user: string) {
     const world = this.service.readUserWorld(user);
-    this.service.updateWorld(world);
+    this.service.updateWorld(user);
     this.service.saveWorld(user, world);
     return world;
 }
@@ -20,7 +20,6 @@ async getWorld(@Args('user') user: string) {
         @Args('quantite') quantite: number,
     ) {
         const world = await this.service.readUserWorld(user);
-        
         const bought_product = world.products.find(p => p.id === id);
         if (!bought_product) throw new Error(`Produit avec l'ID ${id} introuvable`)
 

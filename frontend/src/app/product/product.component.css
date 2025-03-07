@@ -1,0 +1,23 @@
+.cadre {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    background-color: aqua;
+}
+
+.icon {
+    height: 100px;
+    width: 100px;
+    background-color: white;
+}
+
+.grille1 {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-rows: 1fr;
+    grid-column: auto;
+}
+
+.grille2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

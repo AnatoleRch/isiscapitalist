@@ -28,6 +28,8 @@ async getWorld(@Args('user') user: string) {
         if (world.money < totalCost) throw new Error("Fonds insuffisants pour l'achat");
         world.money -= totalCost;
         bought_product.quantite += quantite;
+        this.service.checkPalier(world.products)
+
         bought_product.cout *= Math.pow(bought_product.croissance, quantite);
         this.service.saveWorld(user, world);
     }
@@ -70,6 +72,7 @@ async engagerManager(
 
     // Check if the manager is already unlocked
     if (manager.unlocked) throw new Error(`Manager ${managerName} is already unlocked`);
+    if(manager.seuil > world.money) throw new Error ('Fonds insuffisants pour acheter ce manager');
 
     // Find the product the manager manages
     const product = world.products.find(p => p.id === manager.idcible);

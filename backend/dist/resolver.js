@@ -35,6 +35,7 @@ let GraphQlResolver = class GraphQlResolver {
             throw new Error("Fonds insuffisants pour l'achat");
         world.money -= totalCost;
         bought_product.quantite += quantite;
+        this.service.checkPalier(world.products);
         bought_product.cout *= Math.pow(bought_product.croissance, quantite);
         this.service.saveWorld(user, world);
     }
@@ -56,6 +57,8 @@ let GraphQlResolver = class GraphQlResolver {
             throw new Error(`Manager with name ${managerName} not found`);
         if (manager.unlocked)
             throw new Error(`Manager ${managerName} is already unlocked`);
+        if (manager.seuil > world.money)
+            throw new Error('Fonds insuffisants pour acheter ce manager');
         const product = world.products.find(p => p.id === manager.idcible);
         if (!product)
             throw new Error(`Product with ID ${manager.idcible} not found`);

@@ -118,7 +118,7 @@ exports.origworld = {
                 {
                     name: "Un gros nuage de barbapapa !!",
                     logo: 'icones/barbapapa.png',
-                    seuil: 100,
+                    seuil: 30,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -127,7 +127,7 @@ exports.origworld = {
                 {
                     name: "Une piscine de barbapapa !!!",
                     logo: 'icones/barbapapa.png',
-                    seuil: 1000,
+                    seuil: 50,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -159,7 +159,7 @@ exports.origworld = {
                 {
                     name: "De quoi faire un bonhomme de neige !!",
                     logo: 'icones/glace.png',
-                    seuil: 100,
+                    seuil: 30,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -168,7 +168,7 @@ exports.origworld = {
                 {
                     name: "On peut faire un igloo !!!",
                     logo: 'icones/glace.png',
-                    seuil: 1000,
+                    seuil: 50,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -200,7 +200,7 @@ exports.origworld = {
                 {
                     name: "Une tour de panckakes !!",
                     logo: 'icones/panckake.png',
-                    seuil: 100,
+                    seuil: 30,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -209,7 +209,7 @@ exports.origworld = {
                 {
                     name: "Un gratte-ciel fait de panckakes !!!",
                     logo: 'icones/panckake.png',
-                    seuil: 1000,
+                    seuil: 50,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -241,7 +241,7 @@ exports.origworld = {
                 {
                     name: "100 Paris-Brest !!",
                     logo: 'icones/Paris-Brest.png',
-                    seuil: 100,
+                    seuil: 30,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -250,7 +250,7 @@ exports.origworld = {
                 {
                     name: "1000 Paris-Brest !!!",
                     logo: 'icones/Paris-Brest.png',
-                    seuil: 1000,
+                    seuil: 50,
                     idcible: 1,
                     ratio: 2,
                     typeratio: graphql_1.RatioType.vitesse,
@@ -272,7 +272,7 @@ exports.origworld = {
         {
             name: 'To take and not to give',
             logo: 'icones/all.jpg',
-            seuil: 150,
+            seuil: 90,
             idcible: 0,
             ratio: 3,
             typeratio: graphql_1.RatioType.gain,

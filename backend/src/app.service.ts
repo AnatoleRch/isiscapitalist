@@ -58,7 +58,6 @@ export class AppService {
         }
         // Update timeleft for the next production cycle
         product.timeleft = elapsedTime % product.vitesse;
-        console.log(product.timeleft)
       }
     }
   }

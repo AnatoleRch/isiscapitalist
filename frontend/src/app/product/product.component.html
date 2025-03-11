@@ -1,10 +1,12 @@
 <div class="cadre">
-    <img class="icon" src="" alt="">
+    <img class="icon" [attr.src]="server+product.logo" alt=""  onclick="startProduction()"/>
     <div class="grille1">
-        <p>value</p>
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
         <div class="grille2">
-            <button>buy</button>
-            <p>timer</p>
+            <button class="buttonBuy" onclick="buy()">buy</button>
+            <p id="timer">01:00:00</p>
         </div>
     </div>
 </div>

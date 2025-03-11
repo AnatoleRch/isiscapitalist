@@ -19,6 +19,8 @@ export class AppComponent {
     service.getWorld(service.user).then(
     world => {
       this.world = world.data.getWorld;
+      console.dir(this.world)
+      console.log(this.world.products[0].logo)
     });
     this.server = service.server
     this.user = service.user

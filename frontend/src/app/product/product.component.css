@@ -1,13 +1,19 @@
 .cadre {
     display: grid;
     grid-template-columns: 100px 1fr;
-    background-color: aqua;
+    margin: 20px;
+    background-color: cornflowerblue;
+    border-radius: 10px;
+
 }
 
 .icon {
     height: 100px;
     width: 100px;
     background-color: white;
+    margin: 5px;
+    border-radius: 50%;
+
 }
 
 .grille1 {
@@ -20,4 +26,38 @@
 .grille2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
+.progress-container {
+    width: 95%;
+    background-color: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 5px;
+    margin-left: 10px;
+
+}
+
+.progress-bar {
+    width: 0%;
+    height: 20px;
+    background-color: #4caf50;
+    text-align: center;
+    line-height: 20px;
+    color: white;
+    border-radius: 10px;
+    transition: width 2s linear;
+}
+
+.buttonBuy{
+    margin: 5px;
+    margin-left: 10px;
+    width: 95%;
+}
+.timer{
+    background-color: white;
+    margin: 2.5%;
+    margin-left: 7.5%;
+    width: 100%;
+    padding: 3px;
+
 }

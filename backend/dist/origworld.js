@@ -178,8 +178,8 @@ exports.origworld = {
         },
         {
             id: 5,
-            name: 'Un Panckake !!',
-            logo: 'icones/panckake.png',
+            name: 'Un Pancake !!',
+            logo: 'icones/pancake.png',
             cout: 25,
             croissance: 1.08,
             revenu: 13,
@@ -190,7 +190,7 @@ exports.origworld = {
             paliers: [
                 {
                     name: 'Une pile de panckakes !',
-                    logo: 'icones/panckake.png',
+                    logo: 'icones/pancake.png',
                     seuil: 10,
                     idcible: 1,
                     ratio: 2,
@@ -199,7 +199,7 @@ exports.origworld = {
                 },
                 {
                     name: "Une tour de panckakes !!",
-                    logo: 'icones/panckake.png',
+                    logo: 'icones/pancake.png',
                     seuil: 30,
                     idcible: 1,
                     ratio: 2,
@@ -208,7 +208,7 @@ exports.origworld = {
                 },
                 {
                     name: "Un gratte-ciel fait de panckakes !!!",
-                    logo: 'icones/panckake.png',
+                    logo: 'icones/pancake.png',
                     seuil: 50,
                     idcible: 1,
                     ratio: 2,

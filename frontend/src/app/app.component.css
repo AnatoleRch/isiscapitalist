@@ -1,6 +1,3 @@
-.content {
-  
-}
 .header {
   display: grid;
   grid-template-columns: 25% 25% 30% 20%;
@@ -11,14 +8,15 @@
   position:fixed;
   width: 100%;
   height: 100%;
-  background-color: blueviolet;
+  background-image: url("/chocofactory.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 }
 .products {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-auto-rows: 1fr;
-  background-image: url("/chocofactory.jpg");
-  background-size: cover;
 }
 /* .productdiv {
   width: 70%;
@@ -30,7 +28,7 @@
   margin-bottom: 5%;
 } */
 .leftButtonDiv {
-  background-color: aqua;
+  background-color: transparent;
 }
 
 .leftButton {

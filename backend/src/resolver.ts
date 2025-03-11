@@ -8,7 +8,7 @@ export class GraphQlResolver {
     @Query()
 async getWorld(@Args('user') user: string) {
     const world = this.service.readUserWorld(user);
-    this.service.updateWorld(user);
+    this.service.updateWorld(world);
     this.service.saveWorld(user, world);
     return world;
 }
@@ -22,13 +22,10 @@ async getWorld(@Args('user') user: string) {
         const world = await this.service.readUserWorld(user);
         const bought_product = world.products.find(p => p.id === id);
         if (!bought_product) throw new Error(`Produit avec l'ID ${id} introuvable`)
-
         const totalCost = bought_product.cout * ((1 - Math.pow(bought_product.croissance, quantite)) / (1 - bought_product.croissance));
         if (world.money < totalCost) throw new Error("Fonds insuffisants pour l'achat");
         world.money -= totalCost;
         bought_product.quantite += quantite;
-        this.service.checkPalier(world.products)
-
         bought_product.cout *= Math.pow(bought_product.croissance, quantite);
         this.service.saveWorld(user, world);
     }
@@ -39,8 +36,8 @@ async getWorld(@Args('user') user: string) {
         @Args('id') id: number,    // Item ID
     ) {
         const world = await this.service.readUserWorld(user);
-
         // Find the item in the user's world
+        this.service.updateWorld(world);
         const item = world.products.find(p => p.id === id);
         if (!item) throw new Error(`produit ID= ${id} introuvable`);
 

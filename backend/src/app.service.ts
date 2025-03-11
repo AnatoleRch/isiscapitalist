@@ -35,27 +35,6 @@ export class AppService {
     );
   }
 
-  updateGainVitesse(product, palier) {
-    if (palier.typeratio === "vitesse") {
-        product.vitesse = product.vitesse / palier.ratio
-    }
-    if (palier.typeratio === "gain") {
-        product.revenu = product.revenu * palier.ratio
-    }
-  }
-
-  checkPalier(product) {
-    let nb = product.paliers;
-    for (let i = 0; i < nb; i = i + 1) {
-        if (product.quantite >= product.paliers[i].seuil && product.paliers[i].unlocked == false) {
-            product.paliers[i].unlocked = true
-            this.updateGainVitesse(product, product.paliers[i])
-            console.log(product.palier.name);
-        }
-    }
-}
-
-
   updateProduct(product: Product, elapsedTime: number, world: World) {
     if (product.quantite > 0) { // Vérifier que le produit est possédé
       if (!product.managerUnlocked) {
@@ -84,8 +63,8 @@ export class AppService {
     }
   }
 
-  updateWorld(user: string) {
-    const world = this.readUserWorld(user);
+  updateWorld(world: World) {
+    const user = this;
     const currentTime = Date.now();
     const elapsedTime = currentTime - world.lastupdate; // Temps écoulé en millisecondes
     
@@ -98,7 +77,5 @@ export class AppService {
     // Mise à jour du lastupdate
     world.lastupdate = currentTime;
 
-    // Sauvegarde des modifications
-    this.saveWorld(user, world);
   }
 }

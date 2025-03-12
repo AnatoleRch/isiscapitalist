@@ -8,8 +8,8 @@ import {
   providedIn: 'root'
 })
 export class WebserviceService {
-  //server = 'http://localhost:3000';
-  server = 'https://isiscapitalist.chl.connected-health.fr';
+  server = 'http://localhost:3000';
+  //server = 'https://isiscapitalist.chl.connected-health.fr';
   user = 'toto';
   createClient() {
     return new Client({ url: this.server + "/graphql", exchanges: [fetchExchange] });

@@ -10,7 +10,6 @@ export const GET_WORLD = gql`
             score
             totalangels
             activeangels
-            lastupdate
             products {
             	timeleft
             	quantite

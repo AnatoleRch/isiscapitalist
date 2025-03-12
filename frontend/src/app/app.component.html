@@ -19,14 +19,26 @@
         <button class="leftButton"> Anges </button>
       </div>
       <div class="products">
-        <div class="productdiv"> premier produit 
+        @if (world.products.length != 0) {
+        <div class="productdiv">
           <app-product [prod]="world.products[0]" class="product"></app-product>
         </div>
-        <div class="productdiv"> second produit </div>
-        <div class="productdiv"> troisième produit </div>
-        <div class="productdiv"> quatrième produit </div>
-        <div class="productdiv"> cinquième produit </div>
-        <div class="productdiv"> sixième produit </div>
+        <div class="productdiv">
+          <app-product [prod]="world.products[3]" class="product"></app-product>
+        </div>
+        <div class="productdiv">
+          <app-product [prod]="world.products[1]" class="product"></app-product>
+        </div>
+        <div class="productdiv">
+          <app-product [prod]="world.products[4]" class="product"></app-product>
+        </div>
+        <div class="productdiv">
+          <app-product [prod]="world.products[2]" class="product"></app-product>
+        </div>
+        <div class="productdiv">
+          <app-product [prod]="world.products[5]" class="product"></app-product>
+        </div>
+      }
       </div>
     </div>
   </div>

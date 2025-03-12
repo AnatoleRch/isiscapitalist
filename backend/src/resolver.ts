@@ -27,6 +27,8 @@ async getWorld(@Args('user') user: string) {
         world.money -= totalCost;
         bought_product.quantite += quantite;
         bought_product.cout *= Math.pow(bought_product.croissance, quantite);
+        this.service.checkPalier(bought_product)
+        this.service.checkAllUnlocks(world);
         this.service.saveWorld(user, world);
     }
 
@@ -82,6 +84,46 @@ async engagerManager(
     await this.service.saveWorld(user, world);
 
     return manager;
+}
+
+@Mutation()
+async acheterCashUpgrade(
+    @Args('user') user: string,
+    @Args('name') upgradeName: string,
+) {
+    const world = await this.service.readUserWorld(user);
+
+    // Trouver l'upgrade correspondant au nom
+    const upgrade = world.upgrades.find(u => u.name === upgradeName);
+    if (!upgrade) throw new Error(`Upgrade avec le nom ${upgradeName} introuvable`);
+
+    // Appliquer la fonction de mise à jour
+    this.service.updateUpgrade(world, upgrade, 'money');
+
+    // Sauvegarder les modifications
+    await this.service.saveWorld(user, world);
+
+    return upgrade;
+}
+
+@Mutation()
+async acheterAngelUpgrade(
+    @Args('user') user: string,
+    @Args('name') upgradeName: string,
+) {
+    const world = await this.service.readUserWorld(user);
+
+    // Trouver l'upgrade correspondant au nom
+    const upgrade = world.angelupgrades.find(u => u.name === upgradeName);
+    if (!upgrade) throw new Error(`Upgrade avec le nom ${upgradeName} introuvable`);
+
+    // Appliquer la fonction de mise à jour
+    this.service.updateUpgrade(world, upgrade, 'angels');
+
+    // Sauvegarder les modifications
+    await this.service.saveWorld(user, world);
+
+    return upgrade;
 }
 
 

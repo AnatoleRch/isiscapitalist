@@ -4,6 +4,7 @@ import * as path from 'path';
 import { World, Product } from './graphql'; // Assuming you have a Product type
 import { origworld } from './origworld';
 
+
 @Injectable()
 export class AppService {
   getHello(): string {
@@ -77,4 +78,81 @@ export class AppService {
     world.lastupdate = currentTime;
 
   }
+
+  checkPalier(product) {
+    for (let i = 0; i < product.paliers.length; i++) {
+        const palier = product.paliers[i];
+        if (product.quantite >= palier.seuil && !palier.unlocked) {
+            palier.unlocked = true;
+            this.updateGainVitesse(product, palier);
+            console.log(`Bonus appliqué : ${palier.name}`);
+        }
+    }
+}
+
+checkAllUnlocks(world: World) {
+  world.allunlocks.forEach((unlock) => {
+      if (!unlock.unlocked) {
+          const isUnlocked = world.products.every(
+              (product) => product.quantite >= unlock.seuil
+          );
+
+          if (isUnlocked) {
+              unlock.unlocked = true;
+              
+              // Appliquer le bonus à tous les produits
+              world.products.forEach((product) => {
+                  this.updateGainVitesse(product, unlock);
+              });
+
+              console.log(`AllUnlock débloqué : ${unlock.name}`);
+          }
+      }
+  });
+}
+
+  updateGainVitesse(product: Product, palier) {
+    if (palier.typeratio === "vitesse") {
+        product.vitesse = product.vitesse / palier.ratio;
+    }
+    if (palier.typeratio === "gain") {
+        product.revenu = product.revenu * palier.ratio;
+    }
+    console.log(`Palier atteint : ${palier.name}`);
+}
+
+
+updateUpgrade(world,palier, type: 'money' | 'angels') {
+  // Vérifier si l'upgrade est déjà débloqué
+  if (palier.unlocked) {
+      console.log(`${palier.name} est déjà débloqué.`);
+      return;
+  }
+
+  // Vérifier si l'utilisateur a suffisamment d'argent ou d'anges
+  const hasSufficientResources = type === 'money'
+      ? world.money >= palier.seuil
+      : world.totalangels >= palier.seuil;
+
+  if (!hasSufficientResources) {
+      throw new Error(`Fonds insuffisants pour acheter ${palier.name}`);
+  }
+
+  // Débloquer l'upgrade
+  palier.unlocked = true;
+
+  // Appliquer le bonus sur tous les produits en fonction du type de ratio
+  world.products.forEach(product => {
+      this.updateGainVitesse(product, palier);
+  });
+
+  // Déduire les ressources utilisées
+  if (type === 'money') {
+      world.money -= palier.seuil;
+  } else if (type === 'angels') {
+      world.activeangels -= palier.seuil;
+  }
+
+  console.log(`${palier.name} débloqué et bonus appliqué!`);
+}
 }

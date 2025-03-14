@@ -3,10 +3,11 @@ import { RouterOutlet } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 import { World } from './world';
 import { WebserviceService } from './webservice.service';
+import { BigvaluePipe } from "./bigvalue.pipe";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet,ProductComponent],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

@@ -6,7 +6,7 @@
       <!-- <span>
         <img [attr.src]="server+world.logo" />
        </span> --> </div>
-      <div> <span id="worldname"> {{world.money}} </span> </div>
+      <div> <span [innerHTML]="world.money | bigvalue"> </span> </div>
       <div> multiplicateur </div>
       <div> <span id="worldname"> {{user}} </span> </div>
     </div>

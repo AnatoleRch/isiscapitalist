@@ -1,9 +1,14 @@
 .cadre {
     display: grid;
     grid-template-columns: 100px 1fr;
-    margin: 20px;
-    background-color: cornflowerblue;
-    border-radius: 10px;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: darkslategray;
+    border-radius: 25px;
+    border-top-left-radius: 100px ;
+    border-bottom-left-radius: 100px ;
+    
+
 
 }
 

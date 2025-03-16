@@ -20,33 +20,33 @@
         <button class="leftButton" mat-raised-button (click)="interfaceUnlocks()">Unlocks</button>
         <button class="leftButton" mat-raised-button (click)="interfaceUpgrade()">Cash upgrades</button>
         <button class="leftButton">Angel upgrades</button>
-        <button class="leftButton" mat-raised-button (click)="interfaceManager()">Managers</button>
+        <button  class="leftButton" mat-raised-button [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers == 0" (click)="interfaceManager()">Managers</button>
         <button class="leftButton" mat-raised-button>Inverstors</button>
       </div>
       <div class="products">
         @if (world.products.length != 0) {
         <div class="productdiv">
-          <app-product [prod]="world.products[0]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[0]" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[3]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[3]" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[1]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[1]" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[4]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[4]" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[2]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[2]" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[5]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[5]" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         }

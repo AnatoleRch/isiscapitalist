@@ -6,11 +6,12 @@ import { WebserviceService } from './webservice.service';
 import { BigvaluePipe } from "./bigvalue.pipe";
 import { NgForOf, NgIf } from '@angular/common';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule, MatBadgeModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -20,25 +21,33 @@ export class AppComponent implements OnInit {
   server: string = ''
   world: World = new World();
   user: string = ''
+  badgeManagers: number = 0; 
   constructor(private service: WebserviceService, private snackBar: MatSnackBar) {
     this.service.getWorld(service.user).then((world) => {
       this.world = world.data.getWorld;
+      this.updateBadgeManagers();
     });
     this.server = service.server + '/';
     this.user = service.user
   }
+  
 
   ngOnInit() {
     this.qtmulti = '1'; // Initialisation à 'x1' lors du lancement du composant
   }
 
+  updateBadgeManagers() {
+    this.badgeManagers = this.world.managers.filter(m => !m.unlocked && this.world.money >= m.seuil).length;
+  }
   onBuy(coutTot: number) {
     this.world.money -= coutTot;
+    this.updateBadgeManagers();
   }
 
   onProductionDone(p: Product) {
     this.world.score += p.revenu;
     this.world.money += p.revenu;
+    this.updateBadgeManagers();
   }
 
   changeQtMulti() {
@@ -116,10 +125,11 @@ export class AppComponent implements OnInit {
       produit.managerUnlocked = true;
       manager.unlocked = true;
       this.world.money = this.world.money - manager.seuil;
-      this.popMessage(manager.name +" vient d'etre debloqué. La production de "+produit.name+"est desormais automatique");
+      this.popMessage(manager.name +" vient d'etre debloqué. La production de "+produit.name+"est désormais automatique");
     }
+    this.updateBadgeManagers();
   }
-
+  
   buyUpgrade(p: Palier) {
     let palier = this.getUpgrade(p);
     palier.unlocked = true;

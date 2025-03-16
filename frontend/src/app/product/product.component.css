@@ -42,8 +42,7 @@
 .progBar {
     height: 40px;
     width: 95%;
-    background-color: rgba(167, 167, 167, 0.838); 
-    border-radius: 20px;
+    background-color: #c0bcbc; 
 }
 .revenu{
     font-family: cursive;

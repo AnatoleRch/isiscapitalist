@@ -32,6 +32,7 @@
   margin-top: 5%;
   margin-bottom: 5%;
 } */
+
 .leftButtonDiv {
   background-color: darkslategray;
   height: 100%;
@@ -44,3 +45,57 @@
   margin-right: 10%;
   margin-bottom: 25px;
 }
+
+.modal {
+  position: fixed; /* reste en place */
+  z-index: 2; /* au dessus du reste */
+  height: 100%;
+  overflow:scroll;
+  background-color: rgb(63, 105, 105,0.9);
+  background-size: 100%;
+  width: 80%;
+  left: 20%;
+}
+
+.managerslayout {
+  display: flex;
+  margin-bottom: 10px; /* Ajoute un espacement entre chaque manager */
+  background-color: white;
+  margin-left: 33%;
+  gap: 20px; /* Espacement entre les éléments */
+  width:33%;
+  padding: 10px;
+}
+
+.logo {
+  width: 75px;
+  height: 75px;
+}
+
+.paliername {
+  font-weight: bold; /* Met en gras le nom du manager */
+}
+
+.paliercost,
+.paliertype,
+.palierratio {
+  margin-top: 5px; /* Ajoute un espacement entre chaque information du manager */
+}
+
+.title{
+  font-size:xx-large;
+  text-align: center;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.managerslayout > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hirebutton {
+  padding: 10px 20px;
+}
+.closebutton{}

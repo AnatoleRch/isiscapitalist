@@ -56,6 +56,7 @@ export class AppService {
         const productionCycles = Math.floor(elapsedTime / product.vitesse);
         if (productionCycles > 0) {
           world.money += productionCycles * product.revenu * product.quantite;
+          world.score += productionCycles * product.revenu * product.quantite;
         }
         // Update timeleft for the next production cycle
         product.timeleft = elapsedTime % product.vitesse;
@@ -132,7 +133,7 @@ updateUpgrade(world,palier, type: 'money' | 'angels') {
   // Vérifier si l'utilisateur a suffisamment d'argent ou d'anges
   const hasSufficientResources = type === 'money'
       ? world.money >= palier.seuil
-      : world.totalangels >= palier.seuil;
+      : world.activeangels >= palier.seuil;
 
   if (!hasSufficientResources) {
       throw new Error(`Fonds insuffisants pour acheter ${palier.name}`);

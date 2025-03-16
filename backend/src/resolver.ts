@@ -116,6 +116,7 @@ async acheterAngelUpgrade(
     // Trouver l'upgrade correspondant au nom
     const upgrade = world.angelupgrades.find(u => u.name === upgradeName);
     if (!upgrade) throw new Error(`Upgrade avec le nom ${upgradeName} introuvable`);
+    if(world.activeangels<upgrade.seuil) throw new Error('upgrade trop chère');
 
     // Appliquer la fonction de mise à jour
     this.service.updateUpgrade(world, upgrade, 'angels');

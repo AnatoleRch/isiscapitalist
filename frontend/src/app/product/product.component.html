@@ -4,11 +4,13 @@
     <div class="grille1">
         <div class="nom">
             <span>{{product.name}} </span>
-            <span>Revenu : </span><span [innerHTML]="product.revenu | bigvalue"></span>
         </div>
             <app-my-progress-bar class="progBar" [run]="run" [auto]="auto" frontcolor="#008800" backcolor="#BBBBBB"
                 [orientation]="orientation" [vitesse]="vitesse" [initialValue]="initialValue">
             </app-my-progress-bar>
+            <div class="revenu">
+                <span>Revenu : </span><span class="prix" [innerHTML]="product.revenu | bigvalue"></span>€
+            </div>
         <div class="grille2">
             <button class="buttonBuy" onclick="buy()">Acheter<span class="prix" [innerHTML]="product.cout | bigvalue"></span>€</button>
             <p class="timer">01:00:00</p>

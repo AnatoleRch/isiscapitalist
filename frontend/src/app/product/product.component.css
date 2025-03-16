@@ -9,17 +9,6 @@
     border-bottom-left-radius: 100px ;
 }
 
-.nom{
-    font-family: cursive;
-    font-size: large;
-    color: white;
-    padding: 10px;
-    height : 20px;
-    margin-left: 45px;
-
-}
-
-
 .icon {
     height: 120px;
     width: 120px;
@@ -34,6 +23,15 @@
     display: grid;
     grid-template-columns: 1fr;
     grid-column: auto;
+    margin-left: 45px;
+}
+
+.nom{
+    font-family: cursive;
+    font-size: 17px;
+    color: white;
+    padding: 5px;
+    height : 20px;
 }
 
 .grille2 {
@@ -42,30 +40,27 @@
 }
 
 .progBar {
-    height: 50px;
-    width: 75%;
-    margin-left: 45px;
-    margin-top: 0px;
+    height: 40px;
+    width: 95%;
     background-color: rgba(167, 167, 167, 0.838); 
     border-radius: 20px;
 }
-
+.revenu{
+    font-family: cursive;
+    font-size: 17px;
+    color: white;
+    padding: 5px;
+    height : 15px;
+}
 .buttonBuy{
     margin: 5px;
-    margin-left: 45px;
     width: 95%;
     border-radius: 25px;
 }
 .timer{
     background-color: white;
     margin: 5px;
-    margin-left: 45px;
-    width: 40%;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    padding-right: 5px;
-    
+    padding: 10px;
     border-radius: 25px;
 }
 

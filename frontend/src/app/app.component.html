@@ -1,46 +1,157 @@
-
 <main class="main">
   <div class="content">
     <div class="header">
       <div>
-      <!-- <span>
+        <!-- <span>
         <img [attr.src]="server+world.logo" />
-       </span> --> </div>
-      <div> <span id="worldname"> {{world.money}} </span> </div>
-      <div> multiplicateur </div>
+       </span> -->
+      </div>
+      <div> <span [innerHTML]="world.money | bigvalue"> </span> €</div>
+      <div>
+        Multiplicateur :
+        <button (click)="changeQtMulti()">
+          {{ qtmulti }}
+        </button>
+      </div>
       <div> <span id="worldname"> {{user}} </span> </div>
     </div>
     <div class="main">
-      <div class="leftButtonDiv"> 
-        <button class="leftButton"> Carrière </button>
-        <button class="leftButton"> Bonus </button>
-        <button class="leftButton"> Améliorations </button>
-        <button class="leftButton"> Managers </button>
-        <button class="leftButton"> Anges </button>
+      <div class="leftButtonDiv">
+        <button class="leftButton" mat-raised-button (click)="interfaceUnlocks()">Unlocks</button>
+        <button class="leftButton" mat-raised-button (click)="interfaceUpgrade()">Cash upgrades</button>
+        <button class="leftButton">Angel upgrades</button>
+        <button class="leftButton" mat-raised-button (click)="interfaceManager()">Managers</button>
+        <button class="leftButton" mat-raised-button>Inverstors</button>
       </div>
       <div class="products">
         @if (world.products.length != 0) {
         <div class="productdiv">
-          <app-product [prod]="world.products[0]" class="product"></app-product>
+          <app-product [prod]="world.products[0]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+            (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[3]" class="product"></app-product>
+          <app-product [prod]="world.products[3]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+            (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[1]" class="product"></app-product>
+          <app-product [prod]="world.products[1]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+            (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[4]" class="product"></app-product>
+          <app-product [prod]="world.products[4]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+            (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[2]" class="product"></app-product>
+          <app-product [prod]="world.products[2]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+            (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[5]" class="product"></app-product>
+          <app-product [prod]="world.products[5]" class="product" [cash]="world.money" [qtmulti]="qtmulti"
+            (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
-      }
+        }
       </div>
     </div>
+    <!-- Les managers -->
+    @if(showManagers){
+    <div class="modal">
+      <div>
+        <h1 class="title">Managers make you feel better !</h1>
+      </div>
+      <div>
+        <div *ngFor="let manager of world.managers">
+          <div *ngIf="!manager.unlocked" class="managerslayout">
+            <button class="hirebutton" (click)="hireManager(manager)">Hire !</button>
+            <img class="logo" src="/manager.png" />
+            <div>
+              <div class="managername">{{ manager.name }}</div>
+              <div class="managercible">
+                {{ world.products[manager.idcible - 1].name }}
+              </div>
+              <div class="managercost">Prix : {{ manager.seuil }} €</div>
+            </div>
+          </div>
+        </div>
+        <button class="closebutton" mat-raisedbutton color="primary" (click)="showManagers = !showManagers">Close</button>
+      </div>
+    </div>
+    }
+    <!-- Les Unlocks -->
+    @if(showUnlocks){
+    <div class="modal">
+      <div>
+        <h1 class="title">
+          Want to maximize profits ? Get your investments to these quotas !
+        </h1>
+      </div>
+      <div>
+        <div>
+          @for (palier of world.allunlocks; track palier.name){ @if
+          (!palier.unlocked) {
+          <div>
+            <div class="managerslayout">
+              <img class="logo" [attr.src]="server + palier.logo" />
+              <div>
+                <div class="paliername">{{ palier.name }}</div>
+                <div class="paliercost">Seuil : {{ palier.seuil }}</div>
+                <div class="paliertype">
+                  Type : {{ palier.typeratio }} x{{ palier.ratio }}
+                </div>
+              </div>
+            </div>
+          </div>
+          } }
+        </div>
+        <div *ngFor="let produit of world.products">
+          @for (palier of produit.paliers; track palier.name){ @if
+          (!palier.unlocked) {
+          <div>
+            <div class="managerslayout">
+              <img class="logo" [attr.src]="server + palier.logo" />
+              <div>
+                <div class="paliername">{{ palier.name }}</div>
+                <div class="paliercost">Seuil : {{ palier.seuil }}</div>
+                <div class="paliertype">
+                  Type : {{ palier.typeratio }} x{{ palier.ratio }}
+                </div>
+              </div>
+            </div>
+          </div>
+          } }
+        </div>
+        <button class="closebutton" mat-raisedbutton color="primary" (click)="showUnlocks = !showUnlocks">Close</button>
+      </div>
+    </div>
+    } @if(showUpgrades){
+    <div class="modal">
+      <div>
+        <h1 class="title">Boost your investments !</h1>
+      </div>
+      <div>
+        <div *ngFor="let upgrade of world.upgrades">
+          <div *ngIf="!upgrade.unlocked" class="managerslayout">
+            <button class="hirebutton" (click)="buyUpgrade(upgrade)">Buy !</button>
+            <img class="logo" [attr.src]="server + upgrade.logo" />
+            <div>
+              <div class="paliercible">
+                @if(upgrade.idcible != 0){
+                {{ world.products[upgrade.idcible - 1].name }}
+                } @else {
+                {{ "Upgrade pour tout" }}
+                }
+              </div>
+              <div class="paliercost">Prix : {{ upgrade.seuil }} €</div>
+              <div class="paliertype">
+                Type : {{ upgrade.typeratio }} x {{ upgrade.ratio }}
+              </div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+        <button class="closebutton" mat-raisedbutton color="primary" (click)="showUpgrades = !showUpgrades">Close</button>
+      </div>
+    </div>
+    }
   </div>
 </main>
 

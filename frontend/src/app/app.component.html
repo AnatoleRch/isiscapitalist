@@ -26,27 +26,27 @@
       <div class="products">
         @if (world.products.length != 0) {
         <div class="productdiv">
-          <app-product [prod]="world.products[0]" class="product" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[0]"  [cash]="world.money" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[3]" class="product" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[3]"  [cash]="world.money" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[1]" class="product" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[1]"  [cash]="world.money" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[4]" class="product" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[4]"  [cash]="world.money" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[2]" class="product" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[2]"  [cash]="world.money" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         <div class="productdiv">
-          <app-product [prod]="world.products[5]" class="product" [qtmulti]="qtmulti"
+          <app-product [prod]="world.products[5]"  [cash]="world.money" class="product" [qtmulti]="qtmulti"
             (notifyProduction)="onProductionDone($event)" (notifyBuy)="onBuy($event)"></app-product>
         </div>
         }

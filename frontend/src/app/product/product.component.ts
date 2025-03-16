@@ -17,18 +17,22 @@ export class ProductComponent {
   orientation: Orientation = Orientation.horizontal;
   vitesse: number = 0;
   initialValue: number = 0;
+  progressbarvalue: number = 0
   run: boolean = false;
   auto: boolean = false;
   world: World = new World();
   _qtmulti: string = '1';
-  qtAchat : number = 0;
-  revenuInit: number = 0;
+  money: number =0
 
   constructor(private service: WebserviceService) {
     this.service.getWorld(service.user).then((world) => {
       this.world = world.data.getWorld;
     });
     this.server = service.server + '/'
+  }
+  @Input()
+  set cash(value: number) {
+    this.money = value;
   }
 
   @Input()
@@ -41,8 +45,9 @@ export class ProductComponent {
     this.auto = this.product.managerUnlocked
   }
 
+  
   @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
-  @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
+  @Output() notifyBuy: EventEmitter<{ p: Product; prix: number; qte: number }> = new EventEmitter();
 
   @Input()
   set qtmulti(value: string) {
@@ -50,7 +55,6 @@ export class ProductComponent {
     if (this._qtmulti && this.product) this.calcMaxCanBuy();
   }
 
-  progressbarvalue: number = 0
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
@@ -59,54 +63,53 @@ export class ProductComponent {
       this.product.timeleft = this.product.vitesse
       this.run = true
       this.sleep(this.product.vitesse).then(() => { 
-        this.run = false
+        this.run = false        
         this.notifyProduction.emit(this.product)
       });
     }
   }
 
-  getQtAchat() {
+  getQtAchat():number {
+    let qtAchat:number = 1;
     switch(this._qtmulti) {
       default:
         break;
       case '1':
-        this.qtAchat = 1;
-        this._qtmulti = this.qtAchat.toString()
+        qtAchat = 1;
+        this._qtmulti = qtAchat.toString()
         break;
       case '10':
-        this.qtAchat = 10;
-        this._qtmulti = this.qtAchat.toString()
+        qtAchat = 10;
+        this._qtmulti = qtAchat.toString()
         break;
       case '100':
-        this.qtAchat = 100;
-        this._qtmulti = this.qtAchat.toString()
+        qtAchat = 100;
+        this._qtmulti = qtAchat.toString()
         break;
       case 'Max':
-        this.qtAchat = this.calcMaxCanBuy()
-        console.log(this.qtAchat)
-        this._qtmulti = this.qtAchat.toString()
+        qtAchat = this.calcMaxCanBuy()
+        this._qtmulti = qtAchat.toString()
         break;
     }
+    return qtAchat
+  }
+  getPrixTot(qtAchat:number) :number{
+          // faut la formule pour le cout tot avec croissance
+    return qtAchat*this.product.cout;
   }
 
-  calcMaxCanBuy() {
-    const maxQuantity = Math.floor(Math.log((-this.world.money / this.product.cout) * (1 - this.product.croissance) + 1) / Math.log(this.product.croissance));
+  calcMaxCanBuy() : number{
+    let maxQuantity = Math.floor(Math.log((-this.money / this.product.cout) * (1 - this.product.croissance) + 1) / Math.log(this.product.croissance));
     return maxQuantity;
   }
 
-  BuyProduct(){
-    this.getQtAchat()
-    if(this.product.quantite == 1){
-      this.revenuInit = this.product.revenu
-    }
-    if(this.world.money >= this.qtAchat * this.product.cout){
-      this.product.quantite += this.qtAchat
-      this.product.revenu = this.revenuInit * this.product.quantite
-      console.log(this.revenuInit)
-      // faut la formule pour le cout tot avec croissance
-      let coutTot= this.qtAchat * this.product.cout
-      this.notifyBuy.emit(coutTot);
-      this.product.cout = this.product.cout * this.product.croissance
+  buyProduct(){
+    let prixTot : number=this.getPrixTot(this.getQtAchat())
+    if(this.money >= prixTot){
+      this.product.quantite += this.getQtAchat()
+      // nouveau cout
+      this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.product.quantite)
+      this.notifyBuy.emit({p: this.product, prix: prixTot, qte : this.getQtAchat()});
       
     }
   }

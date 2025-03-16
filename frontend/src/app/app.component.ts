@@ -39,14 +39,15 @@ export class AppComponent implements OnInit {
   updateBadgeManagers() {
     this.badgeManagers = this.world.managers.filter(m => !m.unlocked && this.world.money >= m.seuil).length;
   }
-  onBuy(coutTot: number) {
-    this.world.money -= coutTot;
+  onBuy(event: { p: Product; prix: number; qte: number}) {
+    console.log(`Achat de ${event.p} produits pour un total de ${event.prix}€`);
+    this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
     this.updateBadgeManagers();
   }
 
   onProductionDone(p: Product) {
-    this.world.score += p.revenu;
-    this.world.money += p.revenu;
+    this.world.score += p.revenu*p.quantite;
+    this.world.money += p.revenu*p.quantite;
     this.updateBadgeManagers();
   }
 

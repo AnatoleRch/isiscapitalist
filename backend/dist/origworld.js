@@ -14,7 +14,7 @@ exports.origworld = {
     products: [
         {
             id: 1,
-            name: 'Des bonbons !!',
+            name: 'Bonbons',
             logo: 'icones/bonbon.png',
             cout: 3,
             croissance: 1.03,
@@ -55,7 +55,7 @@ exports.origworld = {
         },
         {
             id: 2,
-            name: 'Des cookies !!',
+            name: 'Cookies',
             logo: 'icones/cookie.png',
             cout: 5,
             croissance: 1.07,
@@ -96,7 +96,7 @@ exports.origworld = {
         },
         {
             id: 3,
-            name: 'Une barbe à papa !!',
+            name: 'Barbe à papa',
             logo: 'icones/barbapapa.png',
             cout: 8,
             croissance: 1.12,
@@ -137,7 +137,7 @@ exports.origworld = {
         },
         {
             id: 4,
-            name: 'Une Glaces !!',
+            name: 'Glaces',
             logo: 'icones/glace.png',
             cout: 15,
             croissance: 1.12,
@@ -178,7 +178,7 @@ exports.origworld = {
         },
         {
             id: 5,
-            name: 'Un Pancake !!',
+            name: 'Pancakes',
             logo: 'icones/pancake.png',
             cout: 25,
             croissance: 1.08,
@@ -219,7 +219,7 @@ exports.origworld = {
         },
         {
             id: 6,
-            name: 'Un Paris-Brest !!',
+            name: 'Paris-Brest',
             logo: 'icones/Paris-Brest.png',
             cout: 35,
             croissance: 1.05,

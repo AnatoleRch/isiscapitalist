@@ -5,11 +5,12 @@ import { Palier, Product, World } from './world';
 import { WebserviceService } from './webservice.service';
 import { BigvaluePipe } from "./bigvalue.pipe";
 import { NgForOf, NgIf } from '@angular/common';
+import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
   server: string = ''
   world: World = new World();
   user: string = ''
-  constructor(private service: WebserviceService) {
+  constructor(private service: WebserviceService, private snackBar: MatSnackBar) {
     this.service.getWorld(service.user).then((world) => {
       this.world = world.data.getWorld;
     });
@@ -72,13 +73,13 @@ export class AppComponent implements OnInit {
   interfaceManager(): void {
     this.showUnlocks = false;
     this.showManagers = !this.showManagers;
-    this.showUpgrades = false;  
+    this.showUpgrades = false;
   }
 
   interfaceUpgrade(): void {
     this.showUnlocks = false;
     this.showManagers = false;
-    this.showUpgrades = !this.showUpgrades;  
+    this.showUpgrades = !this.showUpgrades;
   }
 
   getManager(p: Palier): Palier {
@@ -108,27 +109,24 @@ export class AppComponent implements OnInit {
     return produit;
   }
 
-  hireManager(p: Palier): Palier {
+  hireManager(p: Palier) {
     let manager = this.getManager(p);
-    console.log('manager : ' + manager.name);
-    let produit = this.getProduitManager(p);
-    console.log('poduit : ' + produit.name);
-    produit.timeleft = produit.vitesse;
-    produit.managerUnlocked = true;
-    console.log('produit.managerUnlocked : ' + produit.managerUnlocked);
-    manager.unlocked = true;
-    console.log('manager.unlocked : ' + manager.unlocked);
-
-    return manager;
+    if (this.world.money >= manager.seuil) {
+      let produit = this.getProduitManager(p);
+      produit.managerUnlocked = true;
+      manager.unlocked = true;
+      this.world.money = this.world.money - manager.seuil;
+      this.popMessage(manager.name +" vient d'etre debloqué. La production de "+produit.name+"est desormais automatique");
+    }
   }
 
-  buyUpgrade(p: Palier): Palier {
+  buyUpgrade(p: Palier) {
     let palier = this.getUpgrade(p);
     palier.unlocked = true;
     let id = palier.idcible;
     if (id != 0) {
       let product = this.world.products.find((p) => p.id === id);
-      if (product !== undefined) { 
+      if (product !== undefined) {
         this.updateGainOrVitesse(product, palier);
       }
     } else {
@@ -136,10 +134,9 @@ export class AppComponent implements OnInit {
         this.updateGainOrVitesse(this.world.products[i], palier);
       }
     }
-    return palier
   }
 
-  updateGainOrVitesse(produit :Product, palier: Palier) {
+  updateGainOrVitesse(produit: Product, palier: Palier) {
     // tous les paliers
     if (palier.typeratio === "vitesse") {
       produit.vitesse = produit.vitesse / palier.ratio
@@ -147,7 +144,7 @@ export class AppComponent implements OnInit {
     if (palier.typeratio === "gain") {
       produit.revenu = produit.revenu * palier.ratio
     }
-}
+  }
 
   checkAllUnlocks() {
     let nb_allunlocks = this.world.allunlocks.length;
@@ -172,4 +169,8 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
+  popMessage(message : string) : void {
+    this.snackBar.open(message, "", { duration : 2000 })
+    }
 }

@@ -123,37 +123,43 @@ checkAllUnlocks(world: World) {
 }
 
 
-updateUpgrade(world,palier, type: 'money' | 'angels') {
-  // Vérifier si l'upgrade est déjà débloqué
+updateUpgrade(world, palier, type: 'money' | 'angels') {
   if (palier.unlocked) {
       console.log(`${palier.name} est déjà débloqué.`);
-      return;
+      return { success: false, message: `${palier.name} est déjà débloqué.` };
   }
 
-  // Vérifier si l'utilisateur a suffisamment d'argent ou d'anges
-  const hasSufficientResources = type === 'money'
-      ? world.money >= palier.seuil
-      : world.activeangels >= palier.seuil;
+  const resource = type === 'money' ? world.money : world.activeangels;
+  const resourceName = type === 'money' ? 'argent' : 'anges';
 
-  if (!hasSufficientResources) {
-      throw new Error(`Fonds insuffisants pour acheter ${palier.name}`);
+  if (resource < palier.seuil) {
+      throw new Error(`Fonds insuffisants pour acheter ${palier.name} avec ${resourceName}.`);
   }
 
-  // Débloquer l'upgrade
-  palier.unlocked = true;
-
-  // Appliquer le bonus sur tous les produits en fonction du type de ratio
-  world.products.forEach(product => {
-      this.updateGainVitesse(product, palier);
-  });
-
-  // Déduire les ressources utilisées
+  // Déduire les ressources
   if (type === 'money') {
       world.money -= palier.seuil;
-  } else if (type === 'angels') {
+  } else {
       world.activeangels -= palier.seuil;
   }
 
-  console.log(`${palier.name} débloqué et bonus appliqué!`);
+  palier.unlocked = true;
+
+  // Appliquer le bonus
+  world.products.forEach(product => {
+      const shouldApply = type === 'angels' || palier.idcible === 0 || palier.idcible === product.id;
+
+      if (shouldApply) {
+          if (palier.typeratio === 'gain') {
+              product.revenu *= palier.ratio;
+          } else if (palier.typeratio === 'vitesse') {
+              product.vitesse /= palier.ratio;
+          }
+      }
+  });
+
+  console.log(`${palier.name} débloqué et bonus appliqué !`);
+  return { success: true, message: `${palier.name} débloqué et bonus appliqué !` };
 }
+
 }

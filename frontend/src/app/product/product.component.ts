@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Palier, Product } from '../world';
 import { WebserviceService } from '../webservice.service';
 import { MyProgressBarComponent, Orientation } from './progressbar.component'
@@ -31,6 +31,21 @@ export class ProductComponent {
     this.initialValue = 0
     this.run = false
     this.auto = this.product.managerUnlocked
+  }
+  
+  money: number =0;
+  @Input()
+  set cash(value: number) {
+    this.money = value;
+  }
+  @Output() notifyProduction: EventEmitter<Product> = new EventEmitter<Product>();
+  @Output() notifyBuy: EventEmitter<number> = new EventEmitter<number>();
+
+  _qtmulti: string = '1';
+  @Input()
+  set qtmulti(value: string) {
+    this._qtmulti = value;
+    
   }
 
   progressbarvalue: number = 0

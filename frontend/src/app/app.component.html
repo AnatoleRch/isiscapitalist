@@ -6,7 +6,8 @@
         <img [attr.src]="server+world.logo" />
        </span> -->
       </div>
-      <div> <span [innerHTML]="world.money | bigvalue"> </span> €</div>
+      <div> <span [innerHTML]="world.money | bigvalue"> </span> €, score : 
+        <span [innerHTML]="world.score | bigvalue"> </span></div>
       <div>
         Multiplicateur :
         <button (click)="changeQtMulti()">

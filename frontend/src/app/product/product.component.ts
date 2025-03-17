@@ -148,7 +148,7 @@ export class ProductComponent {
     if(this.money >= prixTot){
       this.product.quantite += this.getQtAchat()
       // nouveau cout
-      this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.product.quantite)
+      this.product.cout = this.product.cout * Math.pow(this.product.croissance, this.getQtAchat())
       this.notifyBuy.emit({p: this.product, prix: prixTot, qte : this.getQtAchat()});
       
     }

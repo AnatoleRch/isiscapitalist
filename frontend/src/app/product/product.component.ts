@@ -75,13 +75,13 @@ export class ProductComponent {
   Calcscore() {
     const user = this;
     const currentTime = Date.now();
-    const elapsedTime = currentTime - this.world.lastupdate; // Temps écoulé en millisecondes
+    const elapsedTime = currentTime - this.lastupdate; // Temps écoulé en millisecondes
     this.calcScoreproduct(this.product, elapsedTime, this.world);
     // Mise à jour du lastupdate
     this.lastupdate = currentTime;
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {
-    let elapsetime = Date.now() - this.world.lastupdate
+    let elapsetime = Date.now() - this.lastupdate
     if (!this.product.managerUnlocked) { //Si on a pas de manager
       if (this.product.timeleft != 0) { //Si le produit est effectivement en production
         if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé

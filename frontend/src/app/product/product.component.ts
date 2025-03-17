@@ -68,13 +68,25 @@ export class ProductComponent {
       });
     }
   }
-
-  calcScore() {
-    let elapsetime = Date.now() - this.world.lastupdate
+  Calcscore() {
+    const user = this;
+    const currentTime = Date.now();
+    const elapsedTime = currentTime - this.world.lastupdate; // Temps écoulé en millisecondes
     
+
+    // Update each product individually
+    this.world.products.forEach(product => {
+      this.calcScoreproduct(product, elapsedTime, this.world);
+    });
+
+    // Mise à jour du lastupdate
+    this.world.lastupdate = currentTime;
+
+  }
+  calcScoreproduct(product: Product, elapsedTime: number, world: World) {
+    let elapsetime = Date.now() - this.world.lastupdate
     if (!this.product.managerUnlocked) { //Si on a pas de manager
       if (this.product.timeleft != 0) { //Si le produit est effectivement en production
-        this.world.lastupdate = Date.now() //on met à jour la date de dernière mise à jour sinon lastupdate ne fait qu'augmenter
         if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
           this.product.timeleft = 0
           this.notifyProduction.emit(this.product)
@@ -91,8 +103,7 @@ export class ProductComponent {
       this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
       for (let i = 0; i < nbObjetsCrees; i++) {
         this.notifyProduction.emit(this.product);
-      } //On informe le monde à chaque produit créé
-      this.world.lastupdate = Date.now()
+      } 
     }
   }
 

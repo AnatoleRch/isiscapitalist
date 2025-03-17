@@ -86,20 +86,20 @@ export class ProductComponent {
     //console.log(this.run)
     let elapsetime = Date.now() - this.world.lastupdate
     if (!this.product.managerUnlocked) { //Si on a pas de manager
-      if (this.product.timeleft > 0) { //Si le produit est effectivement en production
+      this.product.timeleft =- elapsedTime;
+      if (this.product.timeleft < 0) { //Si le produit est effectivement en production
         console.log(this.product.timeleft)
-        if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
+         // Si le produit a eu le temps d'être créé
           this.product.timeleft = 0
           this.notifyProduction.emit(this.product)
           this.run = false
           //On va informer le monde qu'il faut ajouter le revenu du produit au score du monde
-        } else {
-          this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant
+       } else {
           // on met à jour la barre de progression
           this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100
         }
       }
-    } else { // S'il y a un manager
+     else { // S'il y a un manager
       let nbObjetsCrees = Math.floor(elapsetime / this.product.vitesse)
       this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
       for (let i = 0; i < nbObjetsCrees; i++) {

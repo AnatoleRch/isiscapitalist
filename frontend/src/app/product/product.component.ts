@@ -66,6 +66,7 @@ export class ProductComponent {
       this.sleep(this.product.vitesse).then(() => { 
         this.run = false        
         this.notifyProduction.emit(this.product)
+
       });
     }
   }

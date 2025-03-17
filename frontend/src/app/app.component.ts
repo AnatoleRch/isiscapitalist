@@ -127,6 +127,7 @@ export class AppComponent implements OnInit {
       manager.unlocked = true;
       this.world.money = this.world.money - manager.seuil;
       this.popMessage(manager.name +" vient d'etre debloqué. La production de "+produit.name+"est désormais automatique");
+      console.log(this.world)
     }
     this.updateBadgeManagers();
   }

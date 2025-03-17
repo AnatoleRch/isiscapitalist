@@ -2,9 +2,15 @@
   <div class="content">
     <div class="header">
       <div>
-        <!-- <span>
-        <img [attr.src]="server+world.logo" />
-       </span> -->
+        <form action="" method="get" class="form">
+          <div class="form">
+            <label for="name">Enter your name: </label>
+            <input type="text" name="name" id="name" required />
+          </div>
+          <div class="form">
+            <input type="submit" value="Valider" />
+          </div>
+        </form>        
       </div>
       <div class="worldinfo"> <span [innerHTML]="world.money | bigvalue"> </span> €</div>
       <div class="worldinfo">Score : <span [innerHTML]="world.score | bigvalue"> </span></div>

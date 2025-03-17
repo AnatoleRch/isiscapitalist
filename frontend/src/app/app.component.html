@@ -6,15 +6,15 @@
         <img [attr.src]="server+world.logo" />
        </span> -->
       </div>
-      <div> <span [innerHTML]="world.money | bigvalue"> </span> €, score : 
-        <span [innerHTML]="world.score | bigvalue"> </span></div>
-      <div>
+      <div class="worldinfo"> <span [innerHTML]="world.money | bigvalue"> </span> €</div>
+      <div class="worldinfo">Score : <span [innerHTML]="world.score | bigvalue"> </span></div>
+      <div  class="worldinfo">
         Multiplicateur :
         <button (click)="changeQtMulti()">
           {{ qtmulti }}
         </button>
       </div>
-      <div> <span id="worldname"> {{user}} </span> </div>
+      <div class="worldinfo"> User : <span id="worldname"> {{user}} </span> </div>
     </div>
     <div class="main">
       <div class="leftButtonDiv">

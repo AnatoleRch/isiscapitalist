@@ -1,6 +1,6 @@
 .header {
   display: grid;
-  grid-template-columns: 25% 25% 30% 20%;
+  grid-template-columns: 20% 20% 20% 20% 20%;
   height: 75px;
   width: 500%;
   background-color: darkslategray;
@@ -99,3 +99,11 @@
   padding: 10px 20px;
 }
 .closebutton{}
+
+.worldinfo{
+  font-family: cursive;
+  font-size: 30px;
+  color: white;
+  padding: 5px;
+  height : 20px;
+}

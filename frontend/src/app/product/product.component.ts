@@ -81,6 +81,7 @@ export class ProductComponent {
 
     // Mise à jour du lastupdate
     this.world.lastupdate = currentTime;
+    console.log(this.world.lastupdate)
 
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {

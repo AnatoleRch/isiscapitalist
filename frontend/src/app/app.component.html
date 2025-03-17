@@ -19,7 +19,7 @@
     <div class="main">
       <div class="leftButtonDiv">
         <button class="leftButton" mat-raised-button (click)="interfaceUnlocks()">Unlocks</button>
-        <button class="leftButton" mat-raised-button (click)="interfaceUpgrade()">Cash upgrades</button>
+        <button class="leftButton" mat-raised-button (click)="interfaceUpgrade()" [matBadge]="badgeUpgrades" [matBadgeHidden]="badgeUpgrades == 0" >Cash upgrades</button>
         <button class="leftButton">Angel upgrades</button>
         <button  class="leftButton" mat-raised-button [matBadge]="badgeManagers" [matBadgeHidden]="badgeManagers == 0" (click)="interfaceManager()">Managers</button>
         <button class="leftButton" mat-raised-button>Inverstors</button>

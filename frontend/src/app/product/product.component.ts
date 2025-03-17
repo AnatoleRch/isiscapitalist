@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input,OnInit, Output } from '@angular/core';
 import { Palier, Product, World } from '../world';
 import { WebserviceService } from '../webservice.service';
 import { MyProgressBarComponent, Orientation } from './progressbar.component'
@@ -31,6 +31,8 @@ export class ProductComponent {
     });
     this.server = service.server + '/'
   }
+
+  
   @Input()
   set cash(value: number) {
     this.money = value;
@@ -66,7 +68,6 @@ export class ProductComponent {
       this.sleep(this.product.vitesse).then(() => { 
         this.run = false        
         this.notifyProduction.emit(this.product)
-
       });
     }
   }
@@ -81,6 +82,7 @@ export class ProductComponent {
 
     // Mise à jour du lastupdate
     this.world.lastupdate = currentTime;
+
 
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {
@@ -106,8 +108,10 @@ export class ProductComponent {
       } 
     }
   }
-  interval() {
-    setInterval(() => { this.Calcscore(); }, 100);
+  ngOnInit() {
+    setInterval(() => {
+      this.Calcscore();
+    }, 100);
   }
 
   getQtAchat():number {

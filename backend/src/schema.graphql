@@ -33,7 +33,7 @@ type World {
     totalangels: Int!
     activeangels: Int!
     angelbonus: Int!
-    lastupdate: Int!
+    lastupdate: Float!
     products: [Product!]!
     allunlocks: [Palier!]!
     upgrades: [Palier!]!

@@ -9,6 +9,7 @@ export const GET_WORLD = gql`
             money
             score
             totalangels
+            lastupdate
             activeangels
             products {
             	timeleft

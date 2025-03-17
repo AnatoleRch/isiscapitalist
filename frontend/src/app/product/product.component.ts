@@ -23,12 +23,14 @@ export class ProductComponent {
   world: World = new World();
   _qtmulti: string = '1';
   money: number =0
+  lastupdate: number = 0
 
   constructor(private service: WebserviceService) {
     this.service.getWorld(service.user).then((world) => {
       this.world = world.data.getWorld;
     });
     this.server = service.server + '/'
+    this.lastupdate=this.world.lastupdate
   }
 
   

@@ -1,5 +1,5 @@
 <div class="cadre">
-    <img class="icon" [attr.src]="server+product.logo" alt=""  (click)="clickProduction()"/>
+    <img class="icon" [attr.src]="server+product.logo" alt=""  (click)="clickProduction()" disabled="run || product.quantite < 1"/>
 
     <div class="grille1">
         <div class="nom">

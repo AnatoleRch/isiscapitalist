@@ -60,7 +60,7 @@ export class ProductComponent {
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  //startProduction() {
+  startProduction() {
     //if (this.product.quantite >= 1 && this.run==false) {
       //this.product.timeleft = this.product.vitesse
       //this.run = true
@@ -69,7 +69,7 @@ export class ProductComponent {
         //this.notifyProduction.emit(this.product)
       //});
     //}
-  //}
+  }
   Calcscore() {
     const user = this;
     const currentTime = Date.now();

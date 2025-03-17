@@ -46,8 +46,8 @@ export class AppComponent implements OnInit {
   }
 
   onProductionDone(p: Product) {
-    //this.world.score += p.revenu*p.quantite;
-   // this.world.money += p.revenu*p.quantite;
+    this.world.score += p.revenu*p.quantite;
+   this.world.money += p.revenu*p.quantite;
     this.updateBadgeManagers();
   }
 

@@ -62,7 +62,7 @@
       <div>
         <div *ngFor="let manager of world.managers">
           <div *ngIf="!manager.unlocked" class="managerslayout">
-            <button class="hirebutton" (click)="hireManager(manager)">Hire !</button>
+            <button class="hirebutton" (click)="hireManager(manager)">Hire</button>
             <img class="logo" src="/manager.png" />
             <div>
               <div class="managername">{{ manager.name }}</div>
@@ -123,7 +123,8 @@
         <button class="closebutton" mat-raisedbutton color="primary" (click)="showUnlocks = !showUnlocks">Close</button>
       </div>
     </div>
-    } @if(showUpgrades){
+    } 
+    @if(showUpgrades){
     <div class="modal">
       <div>
         <h1 class="title">Boost your investments !</h1>
@@ -131,12 +132,12 @@
       <div>
         <div *ngFor="let upgrade of world.upgrades">
           <div *ngIf="!upgrade.unlocked" class="managerslayout">
-            <button class="hirebutton" (click)="buyUpgrade(upgrade)">Buy !</button>
+            <button class="hirebutton" (click)="buyUpgrade(upgrade)">Buy</button>
             <img class="logo" [attr.src]="server + upgrade.logo" />
             <div>
               <div class="paliercible">
                 @if(upgrade.idcible != 0){
-                {{ world.products[upgrade.idcible - 1].name }}
+                {{ upgrade.name }}
                 } @else {
                 {{ "Upgrade pour tout" }}
                 }

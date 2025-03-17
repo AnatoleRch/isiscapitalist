@@ -60,11 +60,15 @@ export class ProductComponent {
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  startProduction() {
-    if (this.product.quantite >= 1 && this.run==false) {
-      this.product.timeleft = this.product.vitesse
-      this.run = true
+  clickProduction(){
+    if (this.product.quantite >= 1 && this.run==false && !this.product.managerUnlocked) {
+      this.startProduction();
     }
+  }
+  startProduction() {
+      this.product.timeleft = this.product.vitesse;
+      this.run = true;
+    
   }
   Calcscore() {
     const user = this;

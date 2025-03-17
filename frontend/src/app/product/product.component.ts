@@ -69,6 +69,33 @@ export class ProductComponent {
     }
   }
 
+  calcScore() {
+    let elapsetime = Date.now() - this.world.lastupdate
+    
+    if (!this.product.managerUnlocked) { //Si on a pas de manager
+      if (this.product.timeleft != 0) { //Si le produit est effectivement en production
+        this.world.lastupdate = Date.now() //on met à jour la date de dernière mise à jour sinon lastupdate ne fait qu'augmenter
+        if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
+          this.product.timeleft = 0
+          this.notifyProduction.emit(this.product)
+          this.run = false
+          //On va informer le monde qu'il faut ajouter le revenu du produit au score du monde
+        } else {
+          this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant
+          // on met à jour la barre de progression
+          this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100
+        }
+      }
+    } else { // S'il y a un manager
+      let nbObjetsCrees = Math.floor(elapsetime / this.product.vitesse)
+      this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
+      for (let i = 0; i < nbObjetsCrees; i++) {
+        this.notifyProduction.emit(this.product);
+      } //On informe le monde à chaque produit créé
+      this.world.lastupdate = Date.now()
+    }
+  }
+
   getQtAchat():number {
     let qtAchat:number = 1;
     switch(this._qtmulti) {
@@ -113,6 +140,8 @@ export class ProductComponent {
       
     }
   }
+
+  
 
   
 

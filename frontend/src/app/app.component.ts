@@ -5,13 +5,13 @@ import { Palier, Product, World } from './world';
 import { WebserviceService } from './webservice.service';
 import { BigvaluePipe } from "./bigvalue.pipe";
 import { NgForOf, NgIf } from '@angular/common';
-import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule, MatBadgeModule ],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule, MatBadgeModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -21,7 +21,8 @@ export class AppComponent implements OnInit {
   server: string = ''
   world: World = new World();
   user: string = ''
-  badgeManagers: number = 0; 
+  badgeManagers: number = 0;
+  badgeUpgrades: number = 0;
   constructor(private service: WebserviceService, private snackBar: MatSnackBar) {
     this.service.getWorld(service.user).then((world) => {
       this.world = world.data.getWorld;
@@ -30,24 +31,25 @@ export class AppComponent implements OnInit {
     this.server = service.server + '/';
     this.user = service.user
   }
-  
+
 
   ngOnInit() {
     this.qtmulti = '1'; // Initialisation à 'x1' lors du lancement du composant
   }
 
   updateBadgeManagers() {
-    this.badgeManagers = this.world.managers.filter(m => !m.unlocked && this.world.money >= m.seuil).length;
+    this.badgeManagers = this.world.managers.filter(managers => !managers.unlocked && this.world.money >= managers.seuil).length;
+    this.badgeUpgrades = this.world.upgrades.filter(upgrades => !upgrades.unlocked && this.world.money >= upgrades.seuil).length;
   }
-  onBuy(event: { p: Product; prix: number; qte: number}) {
+  onBuy(event: { p: Product; prix: number; qte: number }) {
     console.log(`Achat de ${event.p} produits pour un total de ${event.prix}€`);
     this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
     this.updateBadgeManagers();
   }
 
   onProductionDone(p: Product) {
-    this.world.score += p.revenu*p.quantite;
-   this.world.money += p.revenu*p.quantite;
+    this.world.score += p.revenu * p.quantite;
+    this.world.money += p.revenu * p.quantite;
     this.updateBadgeManagers();
   }
 
@@ -126,26 +128,29 @@ export class AppComponent implements OnInit {
       produit.managerUnlocked = true;
       manager.unlocked = true;
       this.world.money = this.world.money - manager.seuil;
-      this.popMessage(manager.name +" vient d'etre debloqué. La production de "+produit.name+"est désormais automatique");
-      console.log(this.world)
+      this.popMessage(manager.name + " vient d'etre debloqué. La production de " + produit.name + "est désormais automatique");
     }
     this.updateBadgeManagers();
   }
-  
+
   buyUpgrade(p: Palier) {
     let palier = this.getUpgrade(p);
-    palier.unlocked = true;
-    let id = palier.idcible;
-    if (id != 0) {
-      let product = this.world.products.find((p) => p.id === id);
-      if (product !== undefined) {
-        this.updateGainOrVitesse(product, palier);
+    if (this.world.money >= palier.seuil) {
+      palier.unlocked = true;
+      let id = palier.idcible;
+      if (id != 0) {
+        let product = this.world.products.find((p) => p.id === id);
+        if (product !== undefined) {
+          this.updateGainOrVitesse(product, palier);
+        }
+      } else {
+        for (let i = 0; i < 6; i++) {
+          this.updateGainOrVitesse(this.world.products[i], palier);
+        }
       }
-    } else {
-      for (let i = 0; i < 6; i++) {
-        this.updateGainOrVitesse(this.world.products[i], palier);
-      }
+      this.world.money = this.world.money - palier.seuil;
     }
+    this.updateBadgeManagers();
   }
 
   updateGainOrVitesse(produit: Product, palier: Palier) {
@@ -182,7 +187,7 @@ export class AppComponent implements OnInit {
     }
   }
 
-  popMessage(message : string) : void {
-    this.snackBar.open(message, "", { duration : 2000 })
-    }
+  popMessage(message: string): void {
+    this.snackBar.open(message, "", { duration: 2000 })
+  }
 }

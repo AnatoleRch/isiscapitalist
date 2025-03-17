@@ -45,11 +45,11 @@ export class AppComponent implements OnInit {
     this.updateBadgeManagers();
   }
 
-  //onProductionDone(p: Product) {
+  onProductionDone(p: Product) {
     //this.world.score += p.revenu*p.quantite;
    // this.world.money += p.revenu*p.quantite;
-    //this.updateBadgeManagers();
-  //}
+    this.updateBadgeManagers();
+  }
 
   changeQtMulti() {
     switch (this.qtmulti) {

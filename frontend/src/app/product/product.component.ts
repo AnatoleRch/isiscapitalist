@@ -22,8 +22,11 @@ export class ProductComponent {
   auto: boolean = false;
   world: World = new World();
   _qtmulti: string = '1';
-  money: number =0
-  lastupdate: number = 0
+  money: number =0;
+  lastupdate: number = 0;
+  lastobjet: number = 0;
+  nbObjetsCrees: number = 0;
+
 
   constructor(private service: WebserviceService) {
     this.service.getWorld(service.user).then((world) => {
@@ -96,9 +99,16 @@ export class ProductComponent {
         }
       }
     } else { // S'il y a un manager
-      let nbObjetsCrees = Math.floor(elapsetime / this.product.vitesse)
+      this.nbObjetsCrees = this.nbObjetsCrees +elapsetime / this.product.vitesse;
+      // if(this.nbObjetsCrees>1){
+      //   this.nbObjetsCrees=this.nbObjetsCrees-1
+      // }
+      console.log(this.nbObjetsCrees)
       this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
-      for (let i = 0; i < nbObjetsCrees; i++) {
+      this.progressbarvalue = this.nbObjetsCrees * 100
+      for (let i = 1; i < this.nbObjetsCrees; i++) {
+        this.nbObjetsCrees=this.nbObjetsCrees-1
+        console.log("ouai")
         this.notifyProduction.emit(this.product);
       } 
     }

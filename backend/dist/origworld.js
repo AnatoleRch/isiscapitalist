@@ -5,7 +5,7 @@ const graphql_1 = require("./graphql");
 exports.origworld = {
     name: 'A Nice World 2',
     logo: 'icones/ecolo.png',
-    money: 0,
+    money: 1000,
     score: 0,
     totalangels: 0,
     activeangels: 0,

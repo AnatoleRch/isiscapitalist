@@ -39,7 +39,6 @@ export class AppService {
   updateProduct(product: Product, elapsedTime: number, world: World) {
     if (product.quantite > 0) { // Vérifier que le produit est possédé
       if (!product.managerUnlocked) {
-        product.timeleft= product.timeleft - elapsedTime;
         // Produit sans manager : vérifier si timeleft > 0 et < elapsedTime
         if (product.timeleft > 0) {
           if (product.timeleft <= elapsedTime) {

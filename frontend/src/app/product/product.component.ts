@@ -76,12 +76,9 @@ export class ProductComponent {
     const user = this;
     const currentTime = Date.now();
     const elapsedTime = currentTime - this.world.lastupdate; // Temps écoulé en millisecondes
-    // Update each product individually
-    this.world.products.forEach(product => {
-      this.calcScoreproduct(product, elapsedTime, this.world);
-    });
+    this.calcScoreproduct(this.product, elapsedTime, this.world);
     // Mise à jour du lastupdate
-    this.world.lastupdate = currentTime;
+    this.lastupdate = currentTime;
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {
     let elapsetime = Date.now() - this.world.lastupdate

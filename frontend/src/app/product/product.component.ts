@@ -47,9 +47,6 @@ export class ProductComponent {
 
     this.product = value;
     this.vitesse = this.product.vitesse
-    this.initialValue = 0
-    this.run = false
-    this.auto = this.product.managerUnlocked
   }
 
   
@@ -95,17 +92,16 @@ export class ProductComponent {
         } else {
           this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant
           // on met à jour la barre de progression
-          this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100
         }
       }
     } else { // S'il y a un manager
+      this.run=true
       this.nbObjetsCrees = this.nbObjetsCrees +elapsetime / this.product.vitesse;
       // if(this.nbObjetsCrees>1){
       //   this.nbObjetsCrees=this.nbObjetsCrees-1
       // }
       console.log(this.nbObjetsCrees)
       this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
-      this.progressbarvalue = this.nbObjetsCrees * 100
       for (let i = 1; i < this.nbObjetsCrees; i++) {
         this.nbObjetsCrees=this.nbObjetsCrees-1
         console.log("ouai")

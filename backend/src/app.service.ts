@@ -128,23 +128,27 @@ updateUpgrade(world, palier, type: 'money' | 'angels') {
       console.log(`${palier.name} est déjà débloqué.`);
       return { success: false, message: `${palier.name} est déjà débloqué.` };
   }
+
   const resource = type === 'money' ? world.money : world.activeangels;
   const resourceName = type === 'money' ? 'argent' : 'anges';
 
   if (resource < palier.seuil) {
       throw new Error(`Fonds insuffisants pour acheter ${palier.name} avec ${resourceName}.`);
   }
+
   // Déduire les ressources
   if (type === 'money') {
       world.money -= palier.seuil;
   } else {
       world.activeangels -= palier.seuil;
   }
+
   palier.unlocked = true;
 
   // Appliquer le bonus
   world.products.forEach(product => {
       const shouldApply = type === 'angels' || palier.idcible === 0 || palier.idcible === product.id;
+
       if (shouldApply) {
           if (palier.typeratio === 'gain') {
               product.revenu *= palier.ratio;

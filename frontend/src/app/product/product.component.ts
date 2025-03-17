@@ -82,28 +82,27 @@ export class ProductComponent {
     this.world.lastupdate = currentTime;
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {
-    if (product.quantite>0){
-    if (!product.managerUnlocked) { //Si on a pas de manager
-      if (product.timeleft > 0) { //Si le produit est effectivement en production
-        if (product.timeleft <= elapsedTime) { // Si le produit a eu le temps d'être créé
-          product.timeleft = 0
-          this.notifyProduction.emit(product)
+    let elapsetime = Date.now() - this.world.lastupdate
+    if (!this.product.managerUnlocked) { //Si on a pas de manager
+      if (this.product.timeleft != 0) { //Si le produit est effectivement en production
+        if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
+          this.product.timeleft = 0
+          this.notifyProduction.emit(this.product)
           this.run = false
           //On va informer le monde qu'il faut ajouter le revenu du produit au score du monde
         } else {
-          this.product.timeleft = this.product.timeleft - elapsedTime //On met a jour le temps restant
+          this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant
           // on met à jour la barre de progression
           this.progressbarvalue = ((this.product.vitesse - this.product.timeleft) / this.product.vitesse) * 100
         }
       }
     } else { // S'il y a un manager
-      let nbObjetsCrees = Math.floor(elapsedTime / this.product.vitesse)
-      product.timeleft = product.vitesse - elapsedTime % this.product.vitesse
+      let nbObjetsCrees = Math.floor(elapsetime / this.product.vitesse)
+      this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
       for (let i = 0; i < nbObjetsCrees; i++) {
-        this.notifyProduction.emit(product);
+        this.notifyProduction.emit(this.product);
       } 
     }
-  }
   }
   ngOnInit() {
     setInterval(() => {

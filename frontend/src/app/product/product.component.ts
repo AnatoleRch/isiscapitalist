@@ -3,6 +3,7 @@ import { Palier, Product, World } from '../world';
 import { WebserviceService } from '../webservice.service';
 import { MyProgressBarComponent, Orientation } from './progressbar.component'
 import { BigvaluePipe } from "../bigvalue.pipe";
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-product',
@@ -62,18 +63,16 @@ export class ProductComponent {
     if (this.product.quantite >= 1 && this.run==false) {
       this.product.timeleft = this.product.vitesse
       this.run = true
-      // this.sleep(this.product.vitesse).then(() => { 
-      //   this.run = false        
-      //   this.notifyProduction.emit(this.product)
-      // });
+      this.sleep(this.product.vitesse).then(() => { 
+        this.run = false        
+        this.notifyProduction.emit(this.product)
+      });
     }
   }
   Calcscore() {
     const user = this;
     const currentTime = Date.now();
     const elapsedTime = currentTime - this.world.lastupdate; // Temps écoulé en millisecondes
-    
-
     // Update each product individually
     this.world.products.forEach(product => {
       this.calcScoreproduct(product, elapsedTime, this.world);
@@ -105,6 +104,9 @@ export class ProductComponent {
         this.notifyProduction.emit(this.product);
       } 
     }
+  }
+  interval() {
+    setInterval(() => { this.Calcscore(); }, 100);
   }
 
   getQtAchat():number {

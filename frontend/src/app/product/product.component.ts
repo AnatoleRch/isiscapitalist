@@ -62,10 +62,10 @@ export class ProductComponent {
     if (this.product.quantite >= 1 && this.run==false) {
       this.product.timeleft = this.product.vitesse
       this.run = true
-      this.sleep(this.product.vitesse).then(() => { 
-        this.run = false        
-        this.notifyProduction.emit(this.product)
-      });
+      // this.sleep(this.product.vitesse).then(() => { 
+      //   this.run = false        
+      //   this.notifyProduction.emit(this.product)
+      // });
     }
   }
   Calcscore() {

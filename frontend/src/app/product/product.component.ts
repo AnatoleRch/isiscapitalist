@@ -12,7 +12,6 @@ import { interval } from 'rxjs';
   styleUrl: './product.component.css'
 })
 export class ProductComponent {
-
   protected server: string;
   product: Product = new Product();
   orientation: Orientation = Orientation.horizontal;
@@ -61,16 +60,16 @@ export class ProductComponent {
   sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
-  startProduction() {
-    if (this.product.quantite >= 1 && this.run==false) {
-      this.product.timeleft = this.product.vitesse
-      this.run = true
-      this.sleep(this.product.vitesse).then(() => { 
-        this.run = false        
-        this.notifyProduction.emit(this.product)
-      });
-    }
-  }
+  //startProduction() {
+    //if (this.product.quantite >= 1 && this.run==false) {
+      //this.product.timeleft = this.product.vitesse
+      //this.run = true
+      //this.sleep(this.product.vitesse).then(() => { 
+        //this.run = false        
+        //this.notifyProduction.emit(this.product)
+      //});
+    //}
+  //}
   Calcscore() {
     const user = this;
     const currentTime = Date.now();
@@ -82,8 +81,6 @@ export class ProductComponent {
 
     // Mise à jour du lastupdate
     this.world.lastupdate = currentTime;
-    console.log(this.world.lastupdate)
-
 
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {

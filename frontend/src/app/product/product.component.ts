@@ -66,9 +66,19 @@ export class ProductComponent {
     }
   }
   startProduction() {
+    if (!this.run) {
       this.product.timeleft = this.product.vitesse;
       this.run = true;
-    
+      this.progressbarvalue = 0;
+  
+      // Lancer le timeout pour terminer la production
+      setTimeout(() => {
+        this.product.timeleft = 0;
+        this.run = false;
+        this.progressbarvalue = 100;
+        this.notifyProduction.emit(this.product);
+      }, this.product.vitesse);
+    }
   }
   Calcscore() {
     const user = this;
@@ -90,7 +100,6 @@ export class ProductComponent {
         if (this.product.timeleft <= elapsetime) { // Si le produit a eu le temps d'être créé
           this.product.timeleft = 0
           this.notifyProduction.emit(this.product)
-          this.run = false
           //On va informer le monde qu'il faut ajouter le revenu du produit au score du monde
         } else {
           this.product.timeleft = this.product.timeleft - elapsetime //On met a jour le temps restant

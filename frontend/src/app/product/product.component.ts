@@ -43,7 +43,6 @@ export class ProductComponent {
     this.product = value;
     this.vitesse = this.product.vitesse
     this.initialValue = 0
-    this.run = false
     this.auto = this.product.managerUnlocked
   }
 
@@ -84,6 +83,7 @@ export class ProductComponent {
 
   }
   calcScoreproduct(product: Product, elapsedTime: number, world: World) {
+    console.log(this.run)
     let elapsetime = Date.now() - this.world.lastupdate
     if (!this.product.managerUnlocked) { //Si on a pas de manager
       if (this.product.timeleft != 0) { //Si le produit est effectivement en production

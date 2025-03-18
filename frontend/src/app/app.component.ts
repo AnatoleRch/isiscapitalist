@@ -169,6 +169,9 @@ export class AppComponent implements OnInit {
   buyUpgrade(p: Palier) {
     let palier = this.getUpgrade(p);
     if (this.world.money >= palier.seuil) {
+      this.service.acheterCashUpgrade(this.user, palier).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       palier.unlocked = true;
       let id = palier.idcible;
       if (id != 0) {

@@ -3,7 +3,8 @@ import { Injectable } from '@angular/core';
 import { Client, fetchExchange } from '@urql/core';
 import {
   GET_WORLD,
-  LANCER_PRODUCTION
+  LANCER_PRODUCTION,
+  ACHETER_PRODUIT
 } from './Grapqhrequests'
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,12 @@ export class WebserviceService {
     return this.createClient().mutation(LANCER_PRODUCTION, { id:
    product.id}).toPromise();
    }
+   async acheterQtProduit(user: string, product: Product, quantite: number) {
+    return await this.createClient().mutation(ACHETER_PRODUIT, {
+      user: user,
+      id: product.id,
+      quantite: quantite
+    }).toPromise();
+  }
 }
 

@@ -79,3 +79,11 @@ export const LANCER_PRODUCTION = gql`
       id
     }
   }`;
+
+  export const ACHETER_PRODUIT = gql`
+  mutation acheterQtProduit($user: String!, $id: Int!, $quantite: Int!) {
+    acheterQtProduit(user: $user, id: $id, quantite: $quantite) {
+      id
+    }
+  }
+`;

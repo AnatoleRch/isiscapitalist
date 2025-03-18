@@ -162,4 +162,28 @@ updateUpgrade(world, palier, type: 'money' | 'angels') {
   return { success: true, message: `${palier.name} débloqué et bonus appliqué !` };
 }
 
+worldReset(user: string): World {
+  let world = this.readUserWorld(user);
+  this.updateWorld(world);
+
+  const additionalAngels = Math.floor(150 * Math.sqrt(world.score / Math.pow(10, 4))) - world.totalangels;
+  world.totalangels += additionalAngels;
+  world.activeangels += additionalAngels;
+
+  const score = world.score;
+  const totalangels = world.totalangels;
+  const activeangels = world.activeangels;
+  const name = world.name;
+
+  // Reset world to its initial state
+  world = <World>origworld;
+  world.name = name;
+  world.score = score;
+  world.totalangels = totalangels;
+  world.activeangels = activeangels;
+
+  this.saveWorld(user, world);
+
+  return world;
+}
 }

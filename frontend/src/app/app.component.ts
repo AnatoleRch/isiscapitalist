@@ -48,19 +48,33 @@ export class AppComponent implements OnInit {
   }
   onBuy(event: { p: Product; prix: number; qte: number }) {
     console.log(`Achat de ${event.p} produits pour un total de ${event.prix}€`);
-    this.service.lancerProduction(event.p).catch(reason =>
+    this.service.acheterQtProduit(this.user,event.p,event.qte).catch(reason =>
       console.log("erreur: " + reason)
       );
     this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
     for (const palier of event.p.paliers){
-      console.log(palier)
       if (palier.unlocked==false && palier.seuil <= event.p.quantite){
 
         palier.unlocked=true
         this.updateGainOrVitesse(event.p, palier);
       }
     }
-    // for (world.palier)
+    for (const palier of this.world.allunlocks){
+      if (palier.unlocked==false){
+        let unlock: boolean=true;
+        for(const product of this.world.products){
+          if (product.quantite < palier.seuil){
+            unlock =false;
+          }
+        }
+        if (unlock==true){
+          palier.unlocked=true
+          for(const product of this.world.products){
+            this.updateGainOrVitesse(product, palier);
+          }
+        }
+      }
+    }
     this.updateBadgeManagers();
   }
 
@@ -176,30 +190,6 @@ export class AppComponent implements OnInit {
     }
     if (palier.typeratio === "gain") {
       produit.revenu = produit.revenu * palier.ratio
-    }
-  }
-
-  checkAllUnlocks() {
-    let nb_allunlocks = this.world.allunlocks.length;
-    var tableau = [0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < nb_allunlocks; i++) {
-      tableau = [0, 0, 0, 0, 0, 0];
-      if (this.world.allunlocks[i].unlocked === false) {
-        for (let j = 0; j < 6; j++) {
-          if (
-            this.world.products[j].quantite >= this.world.allunlocks[i].seuil
-          ) {
-            tableau[j] = 1;
-          }
-        }
-        if (JSON.stringify(tableau) === JSON.stringify([1, 1, 1, 1, 1, 1])) {
-          this.world.allunlocks[i].unlocked = true;
-          for (let k = 0; k < 6; k++) {
-            console.log("on est arrive jusque la")
-            this.updateGainOrVitesse(this.world.products[k], this.world.allunlocks[i]);
-          }
-        }
-      }
     }
   }
 

@@ -140,8 +140,8 @@ export class ProductComponent {
     return qtAchat
   }
   getPrixTot(qtAchat:number) :number{
-          // faut la formule pour le cout tot avec croissance
-    return qtAchat*this.product.cout;
+    const totalCost = this.product.cout * ((1 - Math.pow(this.product.croissance, qtAchat)) / (1 - this.product.croissance));
+    return totalCost;
   }
 
   calcMaxCanBuy() : number{

@@ -36,7 +36,6 @@ export class AppComponent implements OnInit {
 
   onUsernameChanged() {
     localStorage.setItem("username", this.username);
-    this.service.user = this.username; // Mise à jour du service
   }
   
   ngOnInit() {
@@ -155,6 +154,9 @@ export class AppComponent implements OnInit {
   hireManager(p: Palier) {
     let manager = this.getManager(p);
     if (this.world.money >= manager.seuil) {
+      this.service.engagerManager(this.user, manager).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       let produit = this.getProduitManager(p);
       produit.managerUnlocked = true;
       manager.unlocked = true;

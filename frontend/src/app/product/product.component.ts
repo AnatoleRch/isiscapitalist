@@ -68,6 +68,9 @@ export class ProductComponent {
   }
   startProduction() {
       this.product.timeleft = this.product.vitesse;
+      this.service.lancerProduction(this.product).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       this.run = true;
     
   }

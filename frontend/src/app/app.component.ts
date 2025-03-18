@@ -48,6 +48,9 @@ export class AppComponent implements OnInit {
   }
   onBuy(event: { p: Product; prix: number; qte: number }) {
     console.log(`Achat de ${event.p} produits pour un total de ${event.prix}€`);
+    this.service.lancerProduction(event.p).catch(reason =>
+      console.log("erreur: " + reason)
+      );
     this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
     for (const palier of event.p.paliers){
       console.log(palier)

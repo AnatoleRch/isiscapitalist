@@ -7,11 +7,12 @@ import { BigvaluePipe } from "./bigvalue.pipe";
 import { NgForOf, NgIf } from '@angular/common';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule } from '@angular/material/badge';
+import { FormsModule } from '@angular/forms'; 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule, MatBadgeModule],
+  imports: [RouterOutlet, ProductComponent, BigvaluePipe, NgIf, NgForOf, MatSnackBarModule, MatBadgeModule, FormsModule ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
   user: string = ''
   badgeManagers: number = 0;
   badgeUpgrades: number = 0;
+  username: any;
   constructor(private service: WebserviceService, private snackBar: MatSnackBar) {
     this.service.getWorld(service.user).then((world) => {
       this.world = world.data.getWorld;
@@ -32,7 +34,10 @@ export class AppComponent implements OnInit {
     this.user = service.user
   }
 
-
+  onUsernameChanged() {
+    this.username = localStorage.getItem("username");
+  }
+  
   ngOnInit() {
     this.qtmulti = '1'; // Initialisation à 'x1' lors du lancement du composant
   }
@@ -52,7 +57,7 @@ export class AppComponent implements OnInit {
         this.updateGainOrVitesse(event.p, palier);
       }
     }
-    this.updateBadgeManagers();
+    // for (world.palier)
     this.updateBadgeManagers();
   }
 

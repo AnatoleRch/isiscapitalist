@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
   }
 
   onUsernameChanged() {
-    this.username = localStorage.getItem("username");
+    localStorage.setItem("username", this.username);
   }
   
   ngOnInit() {

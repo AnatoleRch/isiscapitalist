@@ -12,7 +12,8 @@ import {
 export class WebserviceService {
   server = 'http://localhost:3000';
   //server = 'https://isiscapitalist.chl.connected-health.fr';
-  user = 'toto';
+  user: string = localStorage.getItem("username") || "defaultUser"; // Ajout d'une valeur par défaut
+  
   createClient() {
     return new Client({ url: this.server + "/graphql", exchanges: [fetchExchange] });
   }

@@ -9,7 +9,6 @@ export class GraphQlResolver {
 async getWorld(@Args('user') user: string) {
     const world = this.service.readUserWorld(user);
     this.service.updateWorld(world);
-    this.service.saveWorld(user, world);
     return world;
 }
 

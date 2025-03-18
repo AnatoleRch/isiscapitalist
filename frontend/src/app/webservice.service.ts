@@ -6,7 +6,6 @@ import {
   LANCER_PRODUCTION,
   ACHETER_PRODUIT,
   ENGAGER_MANAGER,
-  ACHETER_CASH_UPGRADE
 } from './Grapqhrequests'
 @Injectable({
   providedIn: 'root'
@@ -39,12 +38,6 @@ export class WebserviceService {
       name: manager.name
     }).toPromise();
   }
-  async acheterCashUpgrade(user: string, upgrade: Palier) {
-    console.log(upgrade.name);
-    return await this.createClient().mutation(ACHETER_CASH_UPGRADE, {
-      user,
-      name: upgrade.name
-    }).toPromise();
-  }
+
 }
 

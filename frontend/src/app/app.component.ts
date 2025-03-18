@@ -47,11 +47,11 @@ export class AppComponent implements OnInit {
     this.badgeUpgrades = this.world.upgrades.filter(upgrades => !upgrades.unlocked && this.world.money >= upgrades.seuil).length;
   }
   onBuy(event: { p: Product; prix: number; qte: number }) {
+    this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
     console.log(`Achat de ${event.p} produits pour un total de ${event.prix}€`);
     this.service.acheterQtProduit(this.user,event.p,event.qte).catch(reason =>
       console.log("erreur: " + reason)
       );
-    this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
     for (const palier of event.p.paliers){
       if (palier.unlocked==false && palier.seuil <= event.p.quantite){
 
@@ -153,7 +153,10 @@ export class AppComponent implements OnInit {
 
   hireManager(p: Palier) {
     let manager = this.getManager(p);
-    if (this.world.money >= manager.seuil && this.getProduitManager(manager).quantite >=1) {
+    if (this.world.money >= manager.seuil) {
+      this.service.engagerManager(this.user, manager).catch(reason =>
+        console.log("erreur: " + reason)
+        );
       let produit = this.getProduitManager(p);
       produit.managerUnlocked = true;
       manager.unlocked = true;
@@ -166,9 +169,6 @@ export class AppComponent implements OnInit {
   buyUpgrade(p: Palier) {
     let palier = this.getUpgrade(p);
     if (this.world.money >= palier.seuil) {
-      this.service.acheterCashUpgrade(this.user, palier).catch(reason =>
-        console.log("erreur: " + reason)
-        );
       palier.unlocked = true;
       let id = palier.idcible;
       if (id != 0) {

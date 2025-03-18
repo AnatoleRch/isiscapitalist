@@ -94,11 +94,3 @@ export const ENGAGER_MANAGER = gql`
     }
   }
 `;
-
-export const ACHETER_CASH_UPGRADE = gql`
-  mutation acheterCashUpgrade($user: String!, $name: String!) {
-    acheterCashUpgrade(user: $user, name: $name) {
-      name
-    }
-  }
-`;

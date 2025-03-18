@@ -181,7 +181,6 @@ worldReset(user: string): World {
   world.score = score;
   world.totalangels = totalangels;
   world.activeangels = activeangels;
-
   this.saveWorld(user, world);
 
   return world;

@@ -9,4 +9,5 @@ export declare class GraphQlResolver {
     engagerManager(user: string, managerName: string): Promise<Palier>;
     acheterCashUpgrade(user: string, upgradeName: string): Promise<Palier>;
     acheterAngelUpgrade(user: string, upgradeName: string): Promise<Palier>;
+    resetWorld(user: string): Promise<World>;
 }

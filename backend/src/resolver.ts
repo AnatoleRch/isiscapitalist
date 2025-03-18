@@ -126,10 +126,12 @@ async acheterAngelUpgrade(
 
     return upgrade;
 }
-
-
-
-
+@Mutation()
+    async resetWorld(
+        @Args('user') user: string,
+    ): Promise<World> {
+        return this.service.worldReset(user);
+    }
 
     // Helper function to handle the production timer
     // startProductionTimer(user: string, id: number, speed: number) {

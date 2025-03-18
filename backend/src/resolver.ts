@@ -127,7 +127,7 @@ async acheterAngelUpgrade(
     return upgrade;
 }
 @Mutation()
-    async resetWorld(
+    async resetmonde(
         @Args('user') user: string,
     ): Promise<World> {
         return this.service.worldReset(user);

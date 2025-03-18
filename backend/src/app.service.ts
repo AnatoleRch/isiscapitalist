@@ -43,8 +43,8 @@ export class AppService {
         if (product.timeleft > 0) {
           if (product.timeleft <= elapsedTime) {
             // Production is complete
-            world.money += product.revenu * product.quantite; // Ajouter le revenu
-            world.score += product.revenu * product.quantite;
+            world.money += product.revenu * product.quantite*(1+world.activeangels*world.angelbonus/100); // Ajouter le revenu
+            world.score += product.revenu * product.quantite*(1+world.activeangels*world.angelbonus/100);
             product.timeleft = 0; // Réinitialisation du timeleft
           } else {
             // Production is still ongoing

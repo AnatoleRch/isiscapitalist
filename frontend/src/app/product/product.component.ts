@@ -46,7 +46,6 @@ export class ProductComponent {
   set prod(value: Product) {
 
     this.product = value;
-    this.vitesse = this.product.vitesse
   }
 
   
@@ -100,11 +99,9 @@ export class ProductComponent {
       // if(this.nbObjetsCrees>1){
       //   this.nbObjetsCrees=this.nbObjetsCrees-1
       // }
-      console.log(this.nbObjetsCrees)
       this.product.timeleft = this.product.vitesse - elapsetime % this.product.vitesse
       for (let i = 1; i < this.nbObjetsCrees; i++) {
         this.nbObjetsCrees=this.nbObjetsCrees-1
-        console.log("ouai")
         this.notifyProduction.emit(this.product);
       } 
     }

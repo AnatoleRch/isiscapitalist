@@ -44,13 +44,21 @@ export class AppComponent implements OnInit {
   onBuy(event: { p: Product; prix: number; qte: number }) {
     console.log(`Achat de ${event.p} produits pour un total de ${event.prix}€`);
     this.world.money -= event.prix;  // Soustrait le coût total du montant du joueur
+    for (const palier of event.p.paliers){
+      console.log(palier)
+      if (palier.unlocked==false && palier.seuil <= event.p.quantite){
+
+        palier.unlocked=true
+        this.updateGainOrVitesse(event.p, palier);
+      }
+    }
+    this.updateBadgeManagers();
     this.updateBadgeManagers();
   }
 
   onProductionDone(p: Product) {
     this.world.score += p.revenu * p.quantite;
     this.world.money += p.revenu * p.quantite;
-    this.updateBadgeManagers();
   }
 
   changeQtMulti() {

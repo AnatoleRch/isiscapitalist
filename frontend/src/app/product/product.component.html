@@ -6,7 +6,7 @@
             <span>{{product.name}} </span>
         </div>
             <app-my-progress-bar class="progBar" [run]="run" [auto]="product.managerUnlocked" frontcolor="rgb(255, 114, 215)" backcolor="#BBBBBB"
-                [orientation]="orientation" [vitesse]="vitesse" [initialValue]="initialValue">
+                [orientation]="orientation" [vitesse]="product.vitesse" [initialValue]="initialValue">
             </app-my-progress-bar>
             <div class="revenu">
                 <span>Quantité : </span><span [innerHTML]="product.quantite | bigvalue"></span>

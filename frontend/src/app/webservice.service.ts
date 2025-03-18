@@ -21,15 +21,21 @@ export class WebserviceService {
   getWorld(user: string) {
     return this.createClient().query(GET_WORLD, { "user": user}).toPromise();
   }
-  lancerProduction(product: Product) {
-    return this.createClient().mutation(LANCER_PRODUCTION, { id:
+  async lancerProduction(product: Product) {
+    return await this.createClient().mutation(LANCER_PRODUCTION, { id:
    product.id}).toPromise();
    }
-  acheterQtProduit(user: string, product: Product, quantite: number) {
-    return this.createClient().mutation(ACHETER_PRODUIT, {
+  async acheterQtProduit(user: string, product: Product, quantite: number) {
+    return await this.createClient().mutation(ACHETER_PRODUIT, {
       user: user,
       id: product.id,
       quantite: quantite
+    }).toPromise();
+  }
+  async engagerManager(user: string, manager: Palier) {
+    return await this.createClient().mutation(ENGAGER_MANAGER, {
+      user: user,
+      name: manager.name
     }).toPromise();
   }
 }

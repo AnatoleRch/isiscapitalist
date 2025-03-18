@@ -87,3 +87,10 @@ export const LANCER_PRODUCTION = gql`
     }
   }
 `;
+export const ENGAGER_MANAGER = gql`
+  mutation engagerManager($user: String!, $name: String!) {
+    engagerManager(user: $user, name: $name) {
+      name
+    }
+  }
+`;

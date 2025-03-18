@@ -4,7 +4,8 @@ import { Client, fetchExchange } from '@urql/core';
 import {
   GET_WORLD,
   LANCER_PRODUCTION,
-  ACHETER_PRODUIT
+  ACHETER_PRODUIT,
+  ENGAGER_MANAGER
 } from './Grapqhrequests'
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class WebserviceService {
     return this.createClient().mutation(LANCER_PRODUCTION, { id:
    product.id}).toPromise();
    }
-   async acheterQtProduit(user: string, product: Product, quantite: number) {
-    return await this.createClient().mutation(ACHETER_PRODUIT, {
+  acheterQtProduit(user: string, product: Product, quantite: number) {
+    return this.createClient().mutation(ACHETER_PRODUIT, {
       user: user,
       id: product.id,
       quantite: quantite

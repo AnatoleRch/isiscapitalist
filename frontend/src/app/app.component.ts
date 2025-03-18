@@ -154,9 +154,6 @@ export class AppComponent implements OnInit {
   hireManager(p: Palier) {
     let manager = this.getManager(p);
     if (this.world.money >= manager.seuil && this.getProduitManager(manager).quantite >=1) {
-      this.service.engagerManager(this.user, manager).catch(reason =>
-        console.log("erreur: " + reason)
-        );
       let produit = this.getProduitManager(p);
       produit.managerUnlocked = true;
       manager.unlocked = true;
